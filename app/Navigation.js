@@ -30,7 +30,9 @@ const OnboardingNavigator = createStackNavigator(
 const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen },
   Recipe: { screen: RecipeScreen },
-});
+  },
+  {  headerMode: 'none' }
+);
 
 const FoodStack = createStackNavigator({
   Food: { screen: FoodScreen },
@@ -40,17 +42,19 @@ const FoodStack = createStackNavigator({
 const PlannerStack = createStackNavigator({
   Planner: { screen: PlannerScreen },
   Recipe: { screen: RecipeScreen },
-  Stats: { screen: DailyStatsScreen },
+  // Stats: { screen: DailyStatsScreen },
 });
 
 const StatsStack = createStackNavigator({
   Stats: { screen: StatsScreen },
+  Recipe: { screen: RecipeScreen },
 });
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home: { screen: HomeStack },
     Food: { screen: FoodStack },
+    Action: { screen: () => null },
     Planner: { screen: PlannerStack },
     Stats: { screen: StatsStack },
   },
@@ -61,8 +65,12 @@ const TabNavigator = createBottomTabNavigator(
         let iconName;
         if (routeName === 'Home') {
           iconName = `home`;
-        } else if (routeName === 'Food') {
+        } 
+        else if (routeName === 'Food') {
           iconName = `silverware`;
+        }
+        else if (routeName === 'Action') {
+          iconName = `plus`;
         }
         else if (routeName === 'Planner') {
           iconName = `calendar-edit`;
@@ -71,9 +79,11 @@ const TabNavigator = createBottomTabNavigator(
           iconName = `account`;
         }
 
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        return <Icon name={iconName} size={25} color={tintColor} />;
+        if (routeName === 'Action') {
+          return (<TouchableOpacity onPress={() => navigation.navigate('RecipeFilterModal')}><View style={{width: 40, height: 40, backgroundColor: '#01c870', borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}><Icon name={iconName} size={25} color='white' /></View></TouchableOpacity>);
+        } else {
+          return <Icon name={iconName} size={25} color={tintColor} />;
+        }
       },
     }),
     tabBarOptions: {
@@ -81,7 +91,7 @@ const TabNavigator = createBottomTabNavigator(
       inactiveTintColor: 'gray',
       showLabel: false,
     },
-  }
+  },
 );
 
 const AppNavigator = createSwitchNavigator({
@@ -89,6 +99,14 @@ const AppNavigator = createSwitchNavigator({
   // Onboarding: OnboardingNavigator,
   Main: TabNavigator,
 });
+
+// const ModalStackNavigator = createStackNavigator({
+//   Main: TabNavigator,
+//   ActionNavigator: { screen: AppNavigator }
+//   }, {
+//     headerMode: 'none',
+//     mode:       'modal'
+// });
 
 const RootStack = createStackNavigator(
   {
@@ -105,7 +123,13 @@ const RootStack = createStackNavigator(
   {
     mode: 'modal',
     headerMode: 'none',
-  }
+    transparentCard: true,
+    cardStyle: {
+      backgroundColor: "transparent",
+      opacity: 1
+    },
+  },
+  
 );
 
 const AppContainer = createAppContainer(RootStack);

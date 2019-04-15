@@ -57,7 +57,7 @@ export default class PlannerScreen extends React.Component {
             </TouchableOpacity>
           )}
           renderSectionHeader={({section}) => (
-            <TouchableOpacity onPress={() => this.props.navigation.push('Stats')}>
+            <TouchableOpacity onPress={() => this.props.navigation.push('Recipe')}>
               <Row>
                 <View style={{flex: 1}}styleName="vertical">
                   <Title>{section.title}</Title>

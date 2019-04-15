@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native';
-// import { gql, graphql, compose } from 'react-apollo'
+import { gql, graphql, compose } from 'react-apollo';
 import FBSDK, { LoginManager, LoginButton, AccessToken } from 'react-native-fbsdk'
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import { Button, Text, TextInput } from '@shoutem/ui'

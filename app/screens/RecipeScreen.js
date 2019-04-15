@@ -3,8 +3,20 @@ import { View, Text } from 'react-native';
 
 export default class RecipeScreen extends React.Component {
   static navigationOptions = {
-    header: { visible: false },
+    title: 'Recipe',
+    headerStyle: {
+      backgroundColor: '#232b2b',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
+
+  constructor(props) {
+    super(props);
+
+  }
 
   render() {
     return (
