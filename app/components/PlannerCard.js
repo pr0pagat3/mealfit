@@ -53,7 +53,7 @@ export default class PlannerCard extends React.Component {
           </View>
 
           <View style={styles.foodItem}>
-          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row'}}>
               <View style={{width: 20, height: 20, borderWidth: 1, borderRadius: 10, marginRight: 10}}></View>
               <Text>1x Orange Juice</Text>
             </View>

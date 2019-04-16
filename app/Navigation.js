@@ -22,7 +22,6 @@ const OnboardingNavigator = createStackNavigator(
     OnboardingStepOneScreen: { screen: OnboardingStepOneScreen },
     OnboardingStepTwoScreen: { screen: OnboardingStepTwoScreen },
     OnboardingStepThreeScreen: { screen: OnboardingStepThreeScreen },
-
   },
   {  headerMode: 'none' }
 );
@@ -37,13 +36,16 @@ const HomeStack = createStackNavigator({
 const FoodStack = createStackNavigator({
   Food: { screen: FoodScreen },
   Recipe: { screen: RecipeScreen },
-});
+  },
+  {  headerMode: 'none' }
+);
 
 const PlannerStack = createStackNavigator({
   Planner: { screen: PlannerScreen },
   Recipe: { screen: RecipeScreen },
-  // Stats: { screen: DailyStatsScreen },
-});
+  },
+  {  headerMode: 'none' }
+);
 
 const StatsStack = createStackNavigator({
   Stats: { screen: StatsScreen },

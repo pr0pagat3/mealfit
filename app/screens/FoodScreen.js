@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Platform, Modal, TouchableHighlight } from 'react-native';
+import { View, Platform, Modal, TouchableHighlight, TextInput, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DropDownMenu, Button, Text, ListView, ImageBackground, Tile, Title, Subtitle, Divider, Examples, Card, Image, Caption, TouchableOpacity, Row } from '@shoutem/ui';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { Badge } from 'react-native-elements';
 import restaurants from '../recipes';
+const { height, width } = Dimensions.get('window');
 
 export default class FoodScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -32,7 +33,7 @@ export default class FoodScreen extends React.Component {
       restaurants: restaurants,
       cars: [
       {
-        brand: "Filter",
+        brand: "Sort",
         models:
           {
             model: "Audi R8",
@@ -44,7 +45,7 @@ export default class FoodScreen extends React.Component {
           }
       },
       {
-        brand: "Bugatti",
+        brand: "Standard",
         models: {
           model: "Chiron",
           image: {
@@ -55,7 +56,29 @@ export default class FoodScreen extends React.Component {
         }
       },
       {
-        brand: "Chrysler",
+        brand: "Paleo",
+        models: {
+          model: "Dodge Viper",
+          image: {
+            url: "https://shoutem.github.io/img/ui-toolkit/dropdownmenu/Dodge-Viper.jpg"
+          },
+          description: "The Dodge Viper is a super car "
+            + "manufactured by Dodge (SRT for 2013 and 2014)."
+        }
+      },
+      {
+        brand: "Keto",
+        models: {
+          model: "Dodge Viper",
+          image: {
+            url: "https://shoutem.github.io/img/ui-toolkit/dropdownmenu/Dodge-Viper.jpg"
+          },
+          description: "The Dodge Viper is a super car "
+            + "manufactured by Dodge (SRT for 2013 and 2014)."
+        }
+      },
+      {
+        brand: "Low Carb",
         models: {
           model: "Dodge Viper",
           image: {
@@ -98,6 +121,14 @@ export default class FoodScreen extends React.Component {
 
     return (
       <View style={{ flex: 1 }}>
+      <View style={{backgroundColor: '#00C871', height: 120, justifyContent: 'flex-end'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20}}>
+          <View><Text style={{color: '#fff', fontSize: 18 }}>Recipes</Text></View>
+          <View><Icon color='#fff' size={25} name="plus" /></View>
+        </View>
+        
+        <TextInput placeholder="Find a Recipe" style={{ marginVertical: 10, height: 40, paddingHorizontal: 10, width: width - 40, backgroundColor: '#fff',  borderRadius: 4, alignSelf: 'center' }}/>
+      </View>
       <DropDownMenu
         styleName="horizontal"
         options={this.state.cars}
