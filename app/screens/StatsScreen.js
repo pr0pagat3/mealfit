@@ -8,9 +8,9 @@ const { height, width } = Dimensions.get('window');
 
 export default class StatsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Stats',
+    title: 'Profile',
     headerStyle: {
-      backgroundColor: '#232b2b',
+      backgroundColor: '#00C871',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {

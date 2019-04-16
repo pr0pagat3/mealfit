@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, SectionList, StyleSheet } from 'react-native';
+import { View, SectionList, StyleSheet, TextInput, Dimensions } from 'react-native';
 import { Button, ListView, Title, Subtitle, Text, Caption, Divider, Row, Image, TouchableOpacity, Tile } from '@shoutem/ui';
 import restaurants from '../recipes';
 import { Badge } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+const { height, width } = Dimensions.get('window');
 
 export default class PlannerScreen extends React.Component {
   static navigationOptions = {
@@ -29,6 +30,14 @@ export default class PlannerScreen extends React.Component {
 
     return (
       <View style={{ flex: 1 }}>
+        <View style={{backgroundColor: '#00C871', height: 120, justifyContent: 'flex-end'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20}}>
+          <View><Text style={{color: '#fff', fontSize: 18 }}>Planner</Text></View>
+          <View><Icon color='#fff' size={25} name="plus" /></View>
+        </View>
+        
+        <TextInput placeholder="Find a Recipe" style={{ marginVertical: 10, height: 40, paddingHorizontal: 10, width: width - 40, backgroundColor: '#fff',  borderRadius: 4, alignSelf: 'center' }}/>
+      </View>
         <SectionList
           sections={[
             { title: 'Monday', data: restaurants.slice(0,2) },
