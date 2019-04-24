@@ -50,7 +50,9 @@ const PlannerStack = createStackNavigator({
 const StatsStack = createStackNavigator({
   Stats: { screen: StatsScreen },
   Recipe: { screen: RecipeScreen },
-});
+  },
+  {  headerMode: 'none' }
+);
 
 const TabNavigator = createBottomTabNavigator(
   {

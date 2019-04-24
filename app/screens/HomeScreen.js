@@ -2,12 +2,9 @@ import React from 'react';
 import { View, StyleSheet, Platform, SCREEN_HEIGHT, Text, Animated, Dimensions, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ListView, ImageBackground, Tile, Title, Divider, Caption, TouchableOpacity } from '@shoutem/ui';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import { Badge } from 'react-native-elements';
-import restaurants from '../recipes';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 import PlannerCard from '../components/PlannerCard';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
