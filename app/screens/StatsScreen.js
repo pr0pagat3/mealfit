@@ -35,12 +35,14 @@ export default class StatsScreen extends React.Component {
   )
 
   renderContent = () => (
-    <View style={{flex: 1}}>
-      <Row styleName="small">
-        <Icon name="user-profile" />
-        <Text>Personal Info</Text>
-        <Icon styleName="disclosure" name="right-arrow" />
-      </Row>
+    <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('PersonalInfo')}>
+        <Row styleName="small">
+          <Icon name="user-profile" />
+          <Text>Personal Info</Text>
+          <Icon styleName="disclosure" name="right-arrow" />
+        </Row>
+      </TouchableOpacity>
       <Row styleName="small">
         <Icon name="equalizer" />
         <Text>Body Stats</Text>

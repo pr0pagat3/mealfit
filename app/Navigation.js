@@ -16,6 +16,7 @@ import RecipeScreen from './screens/RecipeScreen';
 import RecipeFilterModal from './screens/RecipeFilterModal';
 import GroceryListModal from './screens/GroceryListModal';
 import DailyStatsScreen from './screens/DailyStatsScreen';
+import PersonalInfoScreen from './screens/PersonalInfoScreen';
 
 const OnboardingNavigator = createStackNavigator(
   {
@@ -49,7 +50,7 @@ const PlannerStack = createStackNavigator({
 
 const StatsStack = createStackNavigator({
   Stats: { screen: StatsScreen },
-  Recipe: { screen: RecipeScreen },
+  PersonalInfo: { screen: PersonalInfoScreen },
   },
   {  headerMode: 'none' }
 );
