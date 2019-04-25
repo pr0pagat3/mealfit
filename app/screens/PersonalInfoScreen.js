@@ -26,7 +26,7 @@ export default class PersonalInfoScreen extends React.Component {
         <View style={styles.navContainer}>
           <View style={styles.statusBar} />
           <View style={styles.navBar}>
-              <TouchableOpacity style={styles.iconLeft} onPress={() => {}}>
+              <TouchableOpacity style={styles.iconLeft} onPress={() => this.props.navigation.goBack()}>
                   <Icon name="arrow-left" size={25} color="#000" />
               </TouchableOpacity>
               <View><Text style={{color: '#000'}}>Personal Info</Text></View>

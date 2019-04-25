@@ -17,6 +17,7 @@ import RecipeFilterModal from './screens/RecipeFilterModal';
 import GroceryListModal from './screens/GroceryListModal';
 import DailyStatsScreen from './screens/DailyStatsScreen';
 import PersonalInfoScreen from './screens/PersonalInfoScreen';
+import BodyStatsView from './screens/BodyStatsView';
 
 const OnboardingNavigator = createStackNavigator(
   {
@@ -51,6 +52,7 @@ const PlannerStack = createStackNavigator({
 const StatsStack = createStackNavigator({
   Stats: { screen: StatsScreen },
   PersonalInfo: { screen: PersonalInfoScreen },
+  BodyStats: { screen: BodyStatsView },
   },
   {  headerMode: 'none' }
 );
@@ -115,15 +117,10 @@ const AppNavigator = createSwitchNavigator({
 
 const RootStack = createStackNavigator(
   {
-    AppNavigator: {
-      screen: AppNavigator,
-    },
-    GroceryListModal: {
-      screen: GroceryListModal,
-    },
-    RecipeFilterModal: {
-      screen: RecipeFilterModal,
-    },
+    AppNavigator: { screen: AppNavigator },
+    GroceryListModal: { screen: GroceryListModal },
+    RecipeFilterModal: { screen: RecipeFilterModal },
+    BodyStatsModal: { screen: BodyStatsView },
   },
   {
     mode: 'modal',

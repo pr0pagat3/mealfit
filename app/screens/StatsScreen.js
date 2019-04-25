@@ -1,10 +1,12 @@
 import React from 'react';
-import { ListView, Row, View, Icon, Text, Divider, TouchableOpacity } from '@shoutem/ui';
+import { ListView, View, Icon, Text, Divider, TouchableOpacity } from '@shoutem/ui';
 import { Dimensions, SCREEN_HEIGHT, Platform, StyleSheet, Image } from 'react-native'
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import restaurants from '../recipes';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 const { height, width } = Dimensions.get('window');
+import { Row } from '../components/Row';
+import { Input } from '../components/Input';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -36,35 +38,12 @@ export default class StatsScreen extends React.Component {
 
   renderContent = () => (
     <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('PersonalInfo')}>
-        <Row styleName="small">
-          <Icon name="user-profile" />
-          <Text>Personal Info</Text>
-          <Icon styleName="disclosure" name="right-arrow" />
-        </Row>
-      </TouchableOpacity>
-      <Row styleName="small">
-        <Icon name="equalizer" />
-        <Text>Body Stats</Text>
-        <Icon styleName="disclosure" name="right-arrow" />
-      </Row>
-      <Row styleName="small">
-        <Icon name="add-to-favorites-off" />
-        <Text>Favourites</Text>
-        <Icon styleName="disclosure" name="right-arrow" />
-      </Row>
-      <Row styleName="small">
-        <Icon name="settings" />
-        <Text>Settings</Text>
-        <Icon styleName="disclosure" name="right-arrow" />
-      </Row>
-
+      <Row name="Personal Info" iconName="account-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
+      <Row name="BodyStats" iconName="chart-pie" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
+      <Row name="Favourites" iconName="heart-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
+      <Row name="Settings" iconName="settings-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
       <View style={{borderTopWidth: 1, width: width-20, marginHorizontal: 20, alignSelf: 'center'}} />
-      <Row styleName="small">
-        <Icon name="checkbox-on" style={{color: "#00C871"}}/>
-        <Text style={{color: "#00C871"}}>Set a New Goal</Text>
-        <Icon style={{color: "#00C871"}} styleName="disclosure" name="right-arrow" />
-      </Row>
+      <Row name="Set a New Goal" iconName="bullseye-arrow" color="#00C871" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
     </View>
   )
 
