@@ -7,11 +7,11 @@ export function Row({name, iconName, onPress}) {
     <TouchableOpacity onPress={onPress}>
       <View style={styles.input}>
         <View style={styles.name}>
-          <Icon name={iconName} size={25}/>
-          <Text style={{marginLeft: 20}}>{name}</Text>
+          <Icon name={iconName} color="#BDBDBD" size={25}/>
+          <Text style={{marginLeft: 20, color: "#404040"}}>{name}</Text>
         </View>
         <View>
-          <Icon name="chevron-right" size={25}/>
+          <Icon name="chevron-right" color="#BDBDBD" size={25}/>
         </View>
       </View>
     </TouchableOpacity>

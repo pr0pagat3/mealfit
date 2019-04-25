@@ -4,9 +4,8 @@ import { Dimensions, SCREEN_HEIGHT, Platform, StyleSheet, Image } from 'react-na
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import restaurants from '../recipes';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 import { Row } from '../components/Row';
-import { Input } from '../components/Input';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -39,16 +38,21 @@ export default class StatsScreen extends React.Component {
   renderContent = () => (
     <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
       <Row name="Personal Info" iconName="account-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
-      <Row name="BodyStats" iconName="chart-pie" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
+      <Row name="BodyStats" iconName="chart-pie" onPress={() => this.props.navigation.navigate('BodyStatsModal')}/>
       <Row name="Favourites" iconName="heart-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
-      <Row name="Settings" iconName="settings-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
-      <View style={{borderTopWidth: 1, width: width-20, marginHorizontal: 20, alignSelf: 'center'}} />
+      <Row name="Settings" iconName="settings-outline" onPress={() => this.props.navigation.navigate('Settings')}/>
+      <View style={{borderTopWidth: 1, width: width-40, marginHorizontal: 40, color: "#BDBDBD", alignSelf: 'center'}} />
       <Row name="Set a New Goal" iconName="bullseye-arrow" color="#00C871" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
     </View>
   )
 
   render() {
-    const calories = (<Text><Image style={{width: 100, height: 100, borderRadius: 50, borderWidth: 1, backgroundColor: '#fff'}} source={require('../assets/images/dog.png')}/></Text>)
+    const calories = (
+      <View style={{flex: 1, justifyContent: 'space-around', paddingVertical: 40 }}>
+        <Image style={{width: 100, height: 100, borderRadius: 50, borderWidth: 1, backgroundColor: '#fff'}} source={require('../assets/images/dog.png')}/>
+        <Text style={{color: '#fff'}}>Warren Phen</Text>
+      </View>
+      )
 
     return (
       <View style={{ flex: 1 }}>
@@ -56,7 +60,7 @@ export default class StatsScreen extends React.Component {
           alwaysShowTitle={false}
           alwaysShowNavBar={true}
           headerMinHeight={HEADER_HEIGHT}
-          headerMaxHeight={300}
+          headerMaxHeight={250}
           extraScrollHeight={20}
           navbarColor="#00C871"
           title={calories}

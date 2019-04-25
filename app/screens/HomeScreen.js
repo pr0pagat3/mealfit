@@ -51,26 +51,28 @@ export default class HomeScreen extends React.Component {
   render() {
     const calories = (
       <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-        <AnimatedCircularProgress
-          size={175}
-          width={10}
-          fill={60}
-          tintColor="#fff"
-          onAnimationComplete={() => console.log('onAnimationComplete')}
-          backgroundColor="#feb551">
-            {
-              (fill) => (
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
-                      { 1601 }
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('BodyStatsModal')}>
+          <AnimatedCircularProgress
+            size={175}
+            width={10}
+            fill={60}
+            tintColor="#fff"
+            onAnimationComplete={() => console.log('onAnimationComplete')}
+            backgroundColor="#feb551">
+              {
+                (fill) => (
+                  <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
+                        { 1601 }
+                      </Text>
+                      <Text style={{color: 'white'}}>
+                        cals left
                     </Text>
-                    <Text style={{color: 'white'}}>
-                      cals left
-                  </Text>
-                </View> 
-              )
-            }
-        </AnimatedCircularProgress>
+                  </View> 
+                )
+              }
+          </AnimatedCircularProgress>
+        </TouchableOpacity>
         <View style={{ marginTop: 30, justifyContent: 'space-between', alignItems: 'flex-end', flexDirection: 'row', width: width-40  }}>
           <View>
             <Text style={styles.macrosText}>Protein</Text>

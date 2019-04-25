@@ -18,6 +18,7 @@ import GroceryListModal from './screens/GroceryListModal';
 import DailyStatsScreen from './screens/DailyStatsScreen';
 import PersonalInfoScreen from './screens/PersonalInfoScreen';
 import BodyStatsView from './screens/BodyStatsView';
+import SettingsView from './screens/SettingsView';
 
 const OnboardingNavigator = createStackNavigator(
   {
@@ -52,7 +53,8 @@ const PlannerStack = createStackNavigator({
 const StatsStack = createStackNavigator({
   Stats: { screen: StatsScreen },
   PersonalInfo: { screen: PersonalInfoScreen },
-  BodyStats: { screen: BodyStatsView },
+  // BodyStats: { screen: BodyStatsView },
+  Settings: { screen: SettingsView },
   },
   {  headerMode: 'none' }
 );
