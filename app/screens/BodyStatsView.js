@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Platform, SCREEN_HEIGHT, Text, Image, TouchableOpacity, Dimensions, ImageBackground } from 'react-native';
 const { height, width } = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LineChart } from 'react-native-chart-kit'
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -32,14 +33,65 @@ export default class BodyStatsView extends React.Component {
             <Text style={{color: "#fff" }}>Average Gained Calorie Per Day</Text>
           </View>
         </View>
+
+        <View style={{ margin: 20}}>
+          <LineChart
+            data={{
+              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+              datasets: [{
+                data: [
+                  Math.random() * 100,
+                  Math.random() * 100,
+                  Math.random() * 100,
+                  Math.random() * 100,
+                  Math.random() * 100,
+                  Math.random() * 100
+                ]
+              }]
+            }}
+            width={Dimensions.get('window').width-40} // from react-native
+            height={220}
+            yAxisLabel={''}
+            chartConfig={{
+              backgroundColor: '#e26a00',
+              backgroundGradientFrom: '#fb8c00',
+              backgroundGradientTo: '#ffa726',
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16
+              }
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16
+            }}
+          />
+        </View>
         <View style={{borderTopWidth: 1, width: width-40, margin: 40, borderColor: "#fff", alignSelf: 'center'}} />
         
         <View style={{marginHorizontal: 20}}>
           <Text style={{fontSize: 18, marginBottom: 8, color: "#fff"}}>Average Eaten Nutrients</Text>
-          <Text style={{color: "#fff", marginVertical: 5}}>Calories</Text>
-          <Text style={{color: "#fff", marginVertical: 5}}>Protein</Text>
-          <Text style={{color: "#fff", marginVertical: 5}}>Fat</Text>
-          <Text style={{color: "#fff", marginVertical: 5}}>Carbohydrates</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={{color: "#fff"}}>Calories (kcal)</Text>
+            <Text style={{color: "#fff"}}>1795</Text>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={{color: "#fff"}}>Protein (g)</Text>
+            <Text style={{color: "#fff"}}>300</Text>  
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={{color: "#fff"}}>Fat (g)</Text>
+            <Text style={{color: "#fff"}}>150</Text>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={{color: "#fff"}}>Carbohydrates (g)</Text>
+            <Text style={{color: "#fff"}}>110</Text>
+          </View>
+          
+          
+          
         </View>
         
         
