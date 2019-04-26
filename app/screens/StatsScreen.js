@@ -28,7 +28,7 @@ export default class StatsScreen extends React.Component {
         <Text style={{color: '#fff'}}>Profile</Text>
         <TouchableOpacity style={styles.iconRight} onPress={() => {}}>
           <View style={{backgroundColor: "#FFD500", borderRadius: 8, padding: 5 }}>
-            <Text style={{color: '#000'}}>Go Premium</Text>
+            <Text style={{color: '#000', fontSize: 10}}>Go Premium</Text>
           </View>
         </TouchableOpacity>
       </View>

@@ -1,146 +1,72 @@
 import React from 'react';
-import { View, Platform, Modal, TouchableHighlight, TextInput, Dimensions } from 'react-native';
+import { View, Platform, Modal, TouchableHighlight, TextInput, Dimensions, TouchableOpacity, Text, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { DropDownMenu, Button, Text, ListView, ImageBackground, Tile, Title, Subtitle, Divider, Examples, Card, Image, Caption, TouchableOpacity, Row } from '@shoutem/ui';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import { Badge } from 'react-native-elements';
-import restaurants from '../recipes';
-const { height, width } = Dimensions.get('window');
+import recipes from '../recipes';
+const { width } = Dimensions.get('window');
+import { Card } from '../components/Card';
 
 export default class FoodScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Food',
-      headerStyle: {
-        backgroundColor: '#232b2b',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerRight: (
-        <Button onPress={() => navigation.navigate('RecipeFilterModal')} styleName="clear">
-          <Icon color='#fff' size={25} name="filter" />
-        </Button>
-      ),
-    }
-  };
-
   constructor(props) {
     super(props);
-
-    this.state = {
-      restaurants: restaurants,
-      cars: [
-      {
-        brand: "Sort",
-        models:
-          {
-            model: "Audi R8",
-            image: {
-              url: "https://shoutem.github.io/img/ui-toolkit/dropdownmenu/Audi-R8.jpg"
-            },
-            description: "Exclusively designed by Audi AG's "
-            + "private subsidiary company, Audi Sport GmbH."
-          }
-      },
-      {
-        brand: "Standard",
-        models: {
-          model: "Chiron",
-          image: {
-            url: "https://shoutem.github.io/img/ui-toolkit/dropdownmenu/Chiron.jpg"
-          },
-          description: "Bugatti premiered the Bugatti "
-            + "Chiron as a successor to the Veyron."
-        }
-      },
-      {
-        brand: "Paleo",
-        models: {
-          model: "Dodge Viper",
-          image: {
-            url: "https://shoutem.github.io/img/ui-toolkit/dropdownmenu/Dodge-Viper.jpg"
-          },
-          description: "The Dodge Viper is a super car "
-            + "manufactured by Dodge (SRT for 2013 and 2014)."
-        }
-      },
-      {
-        brand: "Keto",
-        models: {
-          model: "Dodge Viper",
-          image: {
-            url: "https://shoutem.github.io/img/ui-toolkit/dropdownmenu/Dodge-Viper.jpg"
-          },
-          description: "The Dodge Viper is a super car "
-            + "manufactured by Dodge (SRT for 2013 and 2014)."
-        }
-      },
-      {
-        brand: "Low Carb",
-        models: {
-          model: "Dodge Viper",
-          image: {
-            url: "https://shoutem.github.io/img/ui-toolkit/dropdownmenu/Dodge-Viper.jpg"
-          },
-          description: "The Dodge Viper is a super car "
-            + "manufactured by Dodge (SRT for 2013 and 2014)."
-        }
-      },
-    ],
-    }
-
-    this.renderRow = this.renderRow.bind(this);
   }
 
-  renderRow(restaurant) {
-    return (
-      <TouchableOpacity onPress={() => this.props.navigation.push('Recipe')}>
-        <Row>
-          <Image style={{width:90, height:70}} source={{ uri: restaurant.image && restaurant.image.url }} />
-          <Tile styleName="vertical">
-            <Subtitle>{restaurant.name}</Subtitle>
-            <Caption>{restaurant.address}</Caption>
-            <View style={{flexDirection: 'row'}}>
-              <Badge value={`cals ${restaurant.calories}`}/>
-              <Badge value={`p ${restaurant.protein}`} containerStyle={{ backgroundColor: '#fbc3ca'}}/>
-              <Badge value={`f ${restaurant.fat}`} containerStyle={{ backgroundColor: '#fbf4c3'}}/>
-              <Badge value={`c ${restaurant.carbs}`} containerStyle={{ backgroundColor: '#89c4fa'}}/>
-            </View>
-          </Tile>
-        </Row>
-        <Divider styleName='line'/>
-      </TouchableOpacity>
-    );
+  renderCard = ({item}) => {
+    return <Card image={item.image} name={item.name}/>
   }
 
   render() {
-    const restaurants = this.state.restaurants;
-        const selectedCar = this.state.selectedCar || this.state.cars[0];
-
-    return (
+   return (
       <View style={{ flex: 1 }}>
-      <View style={{backgroundColor: '#00C871', height: 120, justifyContent: 'flex-end'}}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20}}>
-          <View><Text style={{color: '#fff', fontSize: 18 }}>Recipes</Text></View>
-          <View><Icon color='#fff' size={25} name="plus" /></View>
+        <View style={{backgroundColor: '#00C871', height: 120, justifyContent: 'flex-end'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20}}>
+            <View><Text style={{color: '#fff', fontSize: 18 }}>Recipes</Text></View>
+            <View><Icon color='#fff' size={25} name="plus" /></View>
+          </View>
+          <TextInput placeholder="Find a Recipe" style={{ marginVertical: 10, height: 40, paddingHorizontal: 10, width: width - 40, backgroundColor: '#fff',  borderRadius: 4, alignSelf: 'center' }}/>
         </View>
-        
-        <TextInput placeholder="Find a Recipe" style={{ marginVertical: 10, height: 40, paddingHorizontal: 10, width: width - 40, backgroundColor: '#fff',  borderRadius: 4, alignSelf: 'center' }}/>
-      </View>
-      <DropDownMenu
-        styleName="horizontal"
-        options={this.state.cars}
-        selectedOption={selectedCar ? selectedCar : this.state.cars[0]}
-        onOptionSelected={(car) => this.setState({ selectedCar: car })}
-        titleProperty="brand"
-        valueProperty="cars.model"
-      />
-        <ListView
-          data={restaurants}
-          renderRow={this.renderRow}
-        />
+      
+        <View style={{flex: 1, backgroundColor: "#F9F9F9" }}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10, backgroundColor: "#EEEEEE"}}>
+            <Text>Get more out of Mealfit</Text>
+            <TouchableOpacity onPress={() => {}}>
+              <View style={{backgroundColor: "#FFD500", borderRadius: 8, padding: 5 }}>
+                <Text style={{color: '#000', fontSize: 10}}>Go Premium</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{marginLeft: 10, marginTop: 10}}>
+            <Text>Popular</Text>
+          </View>
+
+          <FlatList
+            data={recipes}
+            renderItem={this.renderCard}
+            horizontal={true}
+            style={{padding: 10}}
+          /> 
+
+          <View style={{marginLeft: 10, marginTop: 10}}>
+            <Text>Recommended</Text>
+          </View>
+
+          {/* <View style={{marginLeft: 10, marginTop: 10}}>
+            <Text>Popular, Ketogenic, Paleo, Vegan, </Text>
+          </View>
+          
+          <FlatList
+            data={recipes}
+            renderItem={this.renderCard}
+            horizontal={true}
+            style={{padding: 10}}
+          /> 
+          <FlatList
+            data={recipes}
+            renderItem={this.renderCard}
+            horizontal={true}
+            style={{padding: 10}}
+          /> */}
+        </View>
       </View>
     );
   }
