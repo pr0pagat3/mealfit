@@ -58,7 +58,7 @@ export default class BodyStatsView extends React.Component {
                 backgroundGradientFrom: '#fb8c00',
                 backgroundGradientTo: '#ffa726',
                 decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                color: (opacity = 0.8) => `rgba(255, 255, 255, 0.8)`,
                 style: {
                   borderRadius: 16
                 }
@@ -70,7 +70,7 @@ export default class BodyStatsView extends React.Component {
               }}
             />
           </View>
-          <View style={{borderTopWidth: 1, width: width-40, margin: 40, borderColor: "#fff", alignSelf: 'center'}} />
+          <View style={{borderTopWidth: 1, width: width-40, marginVertical: 10, marginHorizontal: 40, borderColor: "#fff", alignSelf: 'center'}} />
           
           <View style={{margin: 20}}>
             <Text style={{fontSize: 18, marginBottom: 8, color: "#fff"}}>Average Eaten Nutrients</Text>

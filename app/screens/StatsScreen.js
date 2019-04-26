@@ -39,7 +39,7 @@ export default class StatsScreen extends React.Component {
     <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
       <Row name="Personal Info" iconName="account-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
       <Row name="BodyStats" iconName="chart-pie" onPress={() => this.props.navigation.navigate('BodyStatsModal')}/>
-      <Row name="Favourites" iconName="heart-outline" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>
+      <Row name="Favourites" iconName="heart-outline" onPress={() => this.props.navigation.navigate('Favourites')}/>
       <Row name="Settings" iconName="settings-outline" onPress={() => this.props.navigation.navigate('Settings')}/>
       <View style={{borderTopWidth: 1, width: width-40, marginHorizontal: 40, color: "#BDBDBD", alignSelf: 'center'}} />
       <Row name="Set a New Goal" iconName="bullseye-arrow" color="#00C871" onPress={() => this.props.navigation.navigate('PersonalInfo')}/>

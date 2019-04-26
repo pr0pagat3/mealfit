@@ -19,6 +19,7 @@ import DailyStatsScreen from './screens/DailyStatsScreen';
 import PersonalInfoScreen from './screens/PersonalInfoScreen';
 import BodyStatsView from './screens/BodyStatsView';
 import SettingsView from './screens/SettingsView';
+import FavouritesView from './screens/FavouritesView';
 
 const OnboardingNavigator = createStackNavigator(
   {
@@ -55,6 +56,7 @@ const StatsStack = createStackNavigator({
   PersonalInfo: { screen: PersonalInfoScreen },
   // BodyStats: { screen: BodyStatsView },
   Settings: { screen: SettingsView },
+  Favourites: { screen: FavouritesView },
   },
   {  headerMode: 'none' }
 );
