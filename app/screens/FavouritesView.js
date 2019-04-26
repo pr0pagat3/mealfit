@@ -45,6 +45,7 @@ export default class FavouritesView extends React.Component {
           renderItem={this.renderCard}
           horizontal={false}
           numColumns={2}
+          style={{padding: 10}}
         />    
       </View>
     );
