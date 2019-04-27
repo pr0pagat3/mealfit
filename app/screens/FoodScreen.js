@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform, Modal, TouchableHighlight, TextInput, Dimensions, TouchableOpacity, Text, FlatList } from 'react-native';
+import { View, ScrollView, Platform, Modal, TouchableHighlight, Image, TextInput, Dimensions, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import recipes from '../recipes';
 const { width } = Dimensions.get('window');
@@ -34,6 +34,25 @@ export default class FoodScreen extends React.Component {
               </View>
             </TouchableOpacity>
           </View>
+          <ScrollView>
+          <View style={{marginLeft: 10, marginTop: 10}}>
+            <Text>Recommended</Text>
+          </View>
+
+          <TouchableOpacity>
+            <View style={styles.card}>
+              <View style={{flex: 1}}>
+              <Image source={{uri: 'https://shoutem.github.io/static/getting-started/restaurant-6.jpg'}} style={styles.image}/>
+              </View>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{flex: 0.9}}>
+                  <Text numberOfLines={1} style={{fontSize: 12}}>Boosted Protein</Text>
+                  <Text style={{fontSize: 10, fontWeight: '100' }}>325 KCAL</Text>
+                </View>
+                <View style={{flex: 0.1}}><Icon name="heart-outline" color="#BDBDBD" size={20}/></View>
+              </View>
+            </View>
+          </TouchableOpacity>
 
           <View style={{marginLeft: 10, marginTop: 10}}>
             <Text>Popular</Text>
@@ -47,11 +66,7 @@ export default class FoodScreen extends React.Component {
           /> 
 
           <View style={{marginLeft: 10, marginTop: 10}}>
-            <Text>Recommended</Text>
-          </View>
-
-          {/* <View style={{marginLeft: 10, marginTop: 10}}>
-            <Text>Popular, Ketogenic, Paleo, Vegan, </Text>
+            <Text>Keto Recipes</Text>
           </View>
           
           <FlatList
@@ -59,15 +74,38 @@ export default class FoodScreen extends React.Component {
             renderItem={this.renderCard}
             horizontal={true}
             style={{padding: 10}}
-          /> 
-          <FlatList
-            data={recipes}
-            renderItem={this.renderCard}
-            horizontal={true}
-            style={{padding: 10}}
-          /> */}
+          />
+          </ScrollView>
         </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  card: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 15.00,
+    elevation: 24,
+    marginHorizontal: 5,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    marginVertical: 10,
+    width: (width - 20),
+    height: (width/2 - 10),
+    borderRadius: 8,
+    padding: 5,
+    alignSelf: 'center'
+  },
+  image: {
+    resizeMode: 'cover',
+    borderRadius: 8,
+    width: (width - 30),
+    height: (width/2 - 50),
+  }
+});
