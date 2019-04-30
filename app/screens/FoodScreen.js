@@ -11,7 +11,7 @@ export default class FoodScreen extends React.Component {
   }
 
   renderCard = ({item}) => {
-    return <Card image={item.image} name={item.name}/>
+    return <Card image={item.image} name={item.name} onPress={() => this.props.navigation.push('Recipe')}/>
   }
 
   render() {

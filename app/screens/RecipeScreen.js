@@ -40,7 +40,31 @@ export default class RecipeScreen extends React.Component {
   )
 
   renderContent = () => (
-    <View></View>
+    <View>
+      <View style={{flex: 1, backgroundColor: "#fff"}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 15}}>
+        <Text>Number Of Servings</Text>
+        <Text>4</Text>
+      </View>
+      
+      <View style={{marginHorizontal: 20, marginVertical: 5}}>
+        <Text style={{color: "#707070"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos</Text>
+      </View>
+
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 15, marginHorizontal: 30}}>
+        <View style={{flexDirection: 'row', borderBottomWidth: 5, borderColor: "#00C871"}}>
+          <Icon color="#00C871" name="cart-outline" size={20}/>
+          <Text style={{fontSize: 16, color: "#00C871"}}>Ingredients</Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Icon color="#707070" name="clipboard-text-outline" size={20}/>
+          <Text style={{fontSize: 16, color: "#707070"}}>Instructions</Text>
+        </View>
+      </View>
+        
+      </View>
+      
+    </View>
   );
 
   render() {

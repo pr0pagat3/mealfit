@@ -5,9 +5,9 @@ import { TouchableOpacity } from '@shoutem/ui';
 const { height, width } = Dimensions.get('window');
 // import { Card } from '@shoutem/ui'
 
-export function Card({image, name}) {
+export function Card({image, name, onPress}) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
         <View style={{flex: 1}}>
         <Image source={image} style={styles.image}/>
