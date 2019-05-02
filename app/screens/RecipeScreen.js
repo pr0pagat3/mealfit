@@ -17,17 +17,8 @@ const images = {
 export default class RecipeScreen extends React.Component {
   constructor(props) {
     super(props);
-
   }
-
-  renderDailyPlanner = () => {
-    return (
-      <View style={{flex: 1}}>
-        <Text>hello</Text>
-      </View>
-    )
-  }
-
+  
   renderNavBar = () => (
     <View style={styles.navContainer}>
       <View style={styles.statusBar} />
@@ -51,12 +42,12 @@ export default class RecipeScreen extends React.Component {
         <Text style={{color: "#707070"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos</Text>
       </View>
 
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 15, marginHorizontal: 30}}>
-        <View style={{flexDirection: 'row', borderBottomWidth: 5, borderColor: "#00C871"}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row', borderBottomWidth: 5, borderColor: "#00C871", flex: 0.5, justifyContent: 'center', paddingVertical: 15}}>
           <Icon color="#00C871" name="cart-outline" size={20}/>
           <Text style={{fontSize: 16, color: "#00C871"}}>Ingredients</Text>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', flex: 0.5, justifyContent: 'center', paddingVertical: 15}}>
           <Icon color="#707070" name="clipboard-text-outline" size={20}/>
           <Text style={{fontSize: 16, color: "#707070"}}>Instructions</Text>
         </View>
@@ -84,25 +75,25 @@ export default class RecipeScreen extends React.Component {
     return (
       <View style={{ flex: 1 }}>
        <ReactNativeParallaxHeader
-          alwaysShowTitle={false}
-          alwaysShowNavBar={true}
-          headerMinHeight={HEADER_HEIGHT}
-          headerMaxHeight={250}
-          extraScrollHeight={20}
-          navbarColor="#00C871"
-          title={calories}
-          titleStyle={styles.titleStyle}
-          backgroundImage={{uri: 'https://leaf.nutrisystem.com/wp-content/uploads/2016/07/flex-meals-explained.jpg'}}
-          backgroundImageScale={1.2}
-          renderNavBar={this.renderNavBar}
-          renderContent={this.renderContent}
-          containerStyle={styles.container}
-          contentContainerStyle={styles.contentContainer}
-          innerContainerStyle={styles.container}
-          scrollViewProps={{
-            onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
-            onScrollEndDrag: () => console.log('onScrollEndDrag'),
-          }}
+        alwaysShowTitle={false}
+        alwaysShowNavBar={true}
+        headerMinHeight={HEADER_HEIGHT}
+        headerMaxHeight={250}
+        extraScrollHeight={20}
+        navbarColor="#00C871"
+        title={calories}
+        titleStyle={styles.titleStyle}
+        backgroundImage={{uri: 'https://leaf.nutrisystem.com/wp-content/uploads/2016/07/flex-meals-explained.jpg'}}
+        backgroundImageScale={1.2}
+        renderNavBar={this.renderNavBar}
+        renderContent={this.renderContent}
+        containerStyle={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        innerContainerStyle={styles.container}
+        scrollViewProps={{
+          onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
+          onScrollEndDrag: () => console.log('onScrollEndDrag'),
+        }}
       />
 
       </View>
