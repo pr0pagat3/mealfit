@@ -6,9 +6,9 @@ import { Badge } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { height, width } = Dimensions.get('window');
 
-export default class PlannerScreen extends React.Component {
+export default class CommunityScreen extends React.Component {
   static navigationOptions = {
-    title: 'Planner',
+    title: 'Community',
     headerStyle: {
       backgroundColor: '#232b2b',
     },
@@ -32,7 +32,7 @@ export default class PlannerScreen extends React.Component {
       <View style={{ flex: 1 }}>
         <View style={{backgroundColor: '#00C871', height: 120, justifyContent: 'flex-end'}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20}}>
-          <View><Text style={{color: '#fff', fontSize: 18 }}>Planner</Text></View>
+          <View><Text style={{color: '#fff', fontSize: 18 }}>Community</Text></View>
           <View><Icon color='#fff' size={25} name="plus" /></View>
         </View>
         

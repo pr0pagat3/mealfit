@@ -10,7 +10,7 @@ import OnboardingStepTwoScreen from './containers/onboarding/OnboardingStepTwoSc
 import OnboardingStepThreeScreen from './containers/onboarding/OnboardingStepThreeScreen';
 import HomeScreen from './screens/HomeScreen';
 import FoodScreen from './screens/FoodScreen';
-import PlannerScreen from './screens/PlannerScreen';
+import CommunityScreen from './screens/CommunityScreen';
 import StatsScreen from './screens/StatsScreen';
 import RecipeScreen from './screens/RecipeScreen';
 import RecipeFilterModal from './screens/RecipeFilterModal';
@@ -44,8 +44,8 @@ const FoodStack = createStackNavigator({
   {  headerMode: 'none' }
 );
 
-const PlannerStack = createStackNavigator({
-  Planner: { screen: PlannerScreen },
+const CommunityStack = createStackNavigator({
+  Community: { screen: CommunityScreen },
   Recipe: { screen: RecipeScreen },
   },
   {  headerMode: 'none' }
@@ -66,7 +66,7 @@ const TabNavigator = createBottomTabNavigator(
     Home: { screen: HomeStack },
     Food: { screen: FoodStack },
     Action: { screen: () => null },
-    Planner: { screen: PlannerStack },
+    Community: { screen: CommunityStack },
     Stats: { screen: StatsStack },
   },
   {
@@ -83,11 +83,11 @@ const TabNavigator = createBottomTabNavigator(
         else if (routeName === 'Action') {
           iconName = `plus`;
         }
-        else if (routeName === 'Planner') {
-          iconName = `calendar-edit`;
+        else if (routeName === 'Community') {
+          iconName = `forum`;
         }
         else if (routeName === 'Stats') {
-          iconName = `account`;
+          iconName = `account-outline`;
         }
 
         if (routeName === 'Action') {
