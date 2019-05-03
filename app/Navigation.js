@@ -9,6 +9,9 @@ import { Badge } from 'react-native-elements';
 import IdentificationView from './containers/onboarding/IdentificationView';
 import MeasurementView from './containers/onboarding/MeasurementView';
 import ActivityLevelView from './containers/onboarding/ActivityLevelView';
+import MainGoalView from './containers/onboarding/MainGoalView';
+import WeeklyActivityView from './containers/onboarding/WeeklyActivityView';
+import GoalWeightView from './containers/onboarding/GoalWeightView';
 
 //Main App Screens
 import HomeScreen from './screens/HomeScreen';
@@ -29,6 +32,10 @@ const OnboardingNavigator = createStackNavigator(
     IdentificationView: { screen: IdentificationView },
     MeasurementView: { screen: MeasurementView },
     ActivityLevelView: { screen: ActivityLevelView },
+    MainGoalView: { screen: MainGoalView },
+    WeeklyActivityView: { screen: WeeklyActivityView },
+    GoalWeightView: { screen: GoalWeightView },
+
   },
   {  headerMode: 'none' }
 );

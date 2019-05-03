@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 
-class WeeklyActivityView extends React.Component {
+class MainGoalView extends React.Component {
   constructor() {
     super()
 
@@ -15,38 +15,33 @@ class WeeklyActivityView extends React.Component {
   render () {
     return(
       <View style={{flex: 1}}>
-        <NavBar headerTitle="Weekly Activity Goal" />
+        <NavBar headerTitle="Goal" />
         
         <View style={{flex: 1, padding: 20}}>
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-            <Text>Set your weekly goal!</Text>
+            <Text>What is your main goal?</Text>
           </View>
 
           <View style={{flex: 1}}>
             <TouchableOpacity>
               <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 0.5 lbs</Text>
+                <Text style={styles.title}>Lose Weight</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity>
               <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 1 lbs</Text>
+                <Text style={styles.title}>Get Healthier</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity>
               <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 1.5 lbs</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 2 lbs</Text>
+                <Text style={styles.title}>Build Muscle/Gain Weight</Text>
               </View>
             </TouchableOpacity>
           </View>
 
           <View style={{justifyContent: 'flex-end'}}>
-            <Button onPress={() => this.props.navigation.navigate('GoalWeightView')} text="Save"/>
+            <Button onPress={() => this.props.navigation.navigate('WeeklyActivityView')} text="Save"/>
           </View>
         </View>
       </View>
@@ -75,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WeeklyActivityView;
+export default MainGoalView;

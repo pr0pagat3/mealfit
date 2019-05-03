@@ -1,9 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-import { Button, Text, TextInput, Divider } from '@shoutem/ui';
-import { RadioButtons } from 'react-native-radio-buttons';
-import options from './constants';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import Button from '../../components/Button';
 import NavBar from '../../components/NavBar';
 
 class MeasurementView extends React.Component {
@@ -24,51 +21,55 @@ class MeasurementView extends React.Component {
     //     "Extremely Active",
     //   ];
 
-      function setSelectedOption(selectedOption){
-        this.setState({
-          selectedOption
-        });
-      }
-
-      function renderOption(option, selected, onSelect, index){
-        const style = selected ? { fontWeight: 'bold'} : {};
-
-        return (
-          <TouchableWithoutFeedback onPress={onSelect} key={index}>
-            <View style={{borderBottomWidth: 1, borderColor: 'black'}}>
-              <Text style={style}>{option.text}</Text>
-              <Text style={style}>{option.subText}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        );
-      }
-
-      function renderContainer(optionNodes){
-        return <View style={{borderTopWidth: 1}}>{optionNodes}</View>;
-      }
-
     return(
       <View style={{flex: 1}}>
-        <NavBar headerTitle="Identification" />
-        <View>
-          <FormLabel>How active is your current lifestyle?</FormLabel>
-          <Divider />
-          <RadioButtons
-            options={ options }
-            onSelection={ setSelectedOption.bind(this) }
-            selectedOption={this.state.selectedOption }
-            renderOption={ renderOption }
-            renderContainer={ renderContainer }
-          />
+        <NavBar headerTitle="Measurement" />
+        <View style={{flex: 1, padding: 20}}>
+          <View style={{flex: 1}}>
+            <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
+              <Text>How much do you weigh?</Text>
+            </View>
+            <View style={styles.input}>
+              <Text>145 lbs</Text>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>LBS</Text>
+                <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>KG</Text>
+              </View>
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center' }}>
+              <Text>How Tall are you?</Text>
+            </View>
+            <View style={styles.input}>
+              <Text>5 ft, 8 in</Text>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>FT</Text>
+                <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>CM</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={{justifyContent: 'flex-end'}}>
+            <Button onPress={() => this.props.navigation.navigate('ActivityLevelView')} text="Save"/>
+          </View>
         </View>
-        <View style={{flexDirection: 'row', marginHorizontal: 20}}>
-          <Button onPress={() => this.props.navigation.navigate('ActivityLevelView')} styleName="secondary full-width">
-            <Text>Continue</Text>
-          </Button>
-        </View>
+          
       </View>
     )
   }
 }
 
 export default MeasurementView;
+
+const styles = StyleSheet.create({
+  input: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 50,
+    borderColor: '#BDBDBD',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginVertical: 10,
+    padding: 10
+  }
+})

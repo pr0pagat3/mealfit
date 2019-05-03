@@ -4,9 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Picker from 'react-native-picker';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
-// import Input from '../../components/Input';
-import { Input } from 'react-native-elements';
-
+import Input from '../../components/Input';
 const { height, width } = Dimensions.get('window');
 
 export default class IdentificationView extends React.Component {
@@ -15,7 +13,7 @@ export default class IdentificationView extends React.Component {
       <View style={{flex: 1}}>
         <NavBar headerTitle="Identification" />
         <View style={{flex: 1, padding: 20}}>
-          <View style={{justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
             <Text>I am</Text>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -32,18 +30,13 @@ export default class IdentificationView extends React.Component {
               </View>
             </View>
           </View>
-          <View>
-          <Input
-            placeholder='INPUT WITH SHAKING EFFECT'
-            shake={true}
-          />
-          {/* <Input placeholder="Birthday" iconName="cake"/>
-          <Input placeholder="Location" iconName="map-marker-outline"/> */}
-            <Button
-              onPress={() => this.props.navigation.navigate('MeasurementView')}
-              text="Save"
-            />
+          <View style={{flex: 1}}>
+            <Input placeholder="Birthday" iconName="cake"/>
+            <Input placeholder="Location" iconName="map-marker-outline"/>
           </View> 
+          <View style={{justifyContent: 'flex-end'}}>
+            <Button onPress={() => this.props.navigation.navigate('MeasurementView')} text="Save"/>
+          </View>
         </View>
       </View>
     )
