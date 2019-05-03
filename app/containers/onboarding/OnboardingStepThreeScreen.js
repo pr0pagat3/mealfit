@@ -4,6 +4,7 @@ import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elemen
 import { Button, Text, TextInput, Divider } from '@shoutem/ui';
 import { RadioButtons } from 'react-native-radio-buttons';
 import options from './constants';
+import NavBar from '../../components/NavBar';
 
 class OnboardingStepThreeScreen extends React.Component {
   constructor() {
@@ -16,13 +17,10 @@ class OnboardingStepThreeScreen extends React.Component {
 
   render () {
     return(
-      <View style={{flex: 1, marginTop: 50, justifyContent: 'space-evenly'}}>
-        <View>
-          <FormLabel>How active is your current lifestyle?</FormLabel>
-          <Divider />
+      <View style={{flex: 1}}>
+        <NavBar headerTitle="Identification" />
 
-        </View>
-        <View style={{flexDirection: 'row', marginHorizontal: 20}}>
+        <View style={{flexDirection: 'row', marginTop: 100, marginHorizontal: 20}}>
           <Button onPress={() => this.props.navigation.navigate('Home')} styleName="secondary full-width">
             <Text>Finish! 😄</Text>
           </Button>

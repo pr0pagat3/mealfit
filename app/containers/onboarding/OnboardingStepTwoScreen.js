@@ -4,6 +4,7 @@ import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elemen
 import { Button, Text, TextInput, Divider } from '@shoutem/ui';
 import { RadioButtons } from 'react-native-radio-buttons';
 import options from './constants';
+import NavBar from '../../components/NavBar';
 
 class OnboardingStepTwoScreen extends React.Component {
   constructor() {
@@ -47,7 +48,8 @@ class OnboardingStepTwoScreen extends React.Component {
       }
 
     return(
-      <View style={{flex: 1, marginTop: 50, justifyContent: 'space-evenly'}}>
+      <View style={{flex: 1}}>
+        <NavBar headerTitle="Identification" />
         <View>
           <FormLabel>How active is your current lifestyle?</FormLabel>
           <Divider />

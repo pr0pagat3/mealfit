@@ -106,8 +106,7 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 const AppNavigator = createSwitchNavigator({
-  // Blah: DailyStatsScreen,
-  // Onboarding: OnboardingNavigator,
+  Onboarding: OnboardingNavigator,
   Main: TabNavigator,
 });
 
