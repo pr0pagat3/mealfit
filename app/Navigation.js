@@ -5,9 +5,12 @@ import { Button, Text, NavigationBar, ListView, ImageBackground, Tile, Title, Su
 import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
 import { Badge } from 'react-native-elements';
 
-import OnboardingStepOneScreen from './containers/onboarding/OnboardingStepOneScreen';
-import OnboardingStepTwoScreen from './containers/onboarding/OnboardingStepTwoScreen';
-import OnboardingStepThreeScreen from './containers/onboarding/OnboardingStepThreeScreen';
+//Onboarding Screens
+import IdentificationView from './containers/onboarding/IdentificationView';
+import MeasurementView from './containers/onboarding/MeasurementView';
+import ActivityLevelView from './containers/onboarding/ActivityLevelView';
+
+//Main App Screens
 import HomeScreen from './screens/HomeScreen';
 import FoodScreen from './screens/FoodScreen';
 import CommunityScreen from './screens/CommunityScreen';
@@ -23,9 +26,9 @@ import FavouritesView from './screens/FavouritesView';
 
 const OnboardingNavigator = createStackNavigator(
   {
-    OnboardingStepOneScreen: { screen: OnboardingStepOneScreen },
-    OnboardingStepTwoScreen: { screen: OnboardingStepTwoScreen },
-    OnboardingStepThreeScreen: { screen: OnboardingStepThreeScreen },
+    IdentificationView: { screen: IdentificationView },
+    MeasurementView: { screen: MeasurementView },
+    ActivityLevelView: { screen: ActivityLevelView },
   },
   {  headerMode: 'none' }
 );

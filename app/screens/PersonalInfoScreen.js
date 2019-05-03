@@ -4,8 +4,8 @@ import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { height, width } = Dimensions.get('window');
 import restaurants from '../recipes';
-import { Input } from '../components/Input'
-import { Button } from '../components/Button'
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;

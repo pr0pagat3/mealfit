@@ -6,7 +6,7 @@ import { RadioButtons } from 'react-native-radio-buttons';
 import options from './constants';
 import NavBar from '../../components/NavBar';
 
-class OnboardingStepThreeScreen extends React.Component {
+class ActivityLevelView extends React.Component {
   constructor() {
     super()
 
@@ -30,4 +30,4 @@ class OnboardingStepThreeScreen extends React.Component {
   }
 }
 
-export default OnboardingStepThreeScreen;
+export default ActivityLevelView;

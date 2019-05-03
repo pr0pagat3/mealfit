@@ -6,7 +6,7 @@ import { RadioButtons } from 'react-native-radio-buttons';
 import options from './constants';
 import NavBar from '../../components/NavBar';
 
-class OnboardingStepTwoScreen extends React.Component {
+class MeasurementView extends React.Component {
   constructor() {
     super()
 
@@ -62,7 +62,7 @@ class OnboardingStepTwoScreen extends React.Component {
           />
         </View>
         <View style={{flexDirection: 'row', marginHorizontal: 20}}>
-          <Button onPress={() => this.props.navigation.navigate('OnboardingStepThreeScreen')} styleName="secondary full-width">
+          <Button onPress={() => this.props.navigation.navigate('ActivityLevelView')} styleName="secondary full-width">
             <Text>Continue</Text>
           </Button>
         </View>
@@ -71,4 +71,4 @@ class OnboardingStepTwoScreen extends React.Component {
   }
 }
 
-export default OnboardingStepTwoScreen;
+export default MeasurementView;
