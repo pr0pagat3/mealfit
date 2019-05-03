@@ -5,7 +5,7 @@ import { Dimensions, SCREEN_HEIGHT, Platform, StyleSheet, Image } from 'react-na
 import restaurants from '../recipes';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 const { width } = Dimensions.get('window');
-import { Row } from '../components/Row';
+import Row from '../../components/Row';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -49,7 +49,7 @@ export default class StatsScreen extends React.Component {
   render() {
     const calories = (
       <View style={{flex: 1, justifyContent: 'space-around', paddingVertical: 40 }}>
-        <Image style={{width: 100, height: 100, borderRadius: 50, borderWidth: 1, backgroundColor: '#fff'}} source={require('../assets/images/dog.png')}/>
+        <Image style={{width: 100, height: 100, borderRadius: 50, borderWidth: 1, backgroundColor: '#fff'}} source={require('../../assets/images/dog.png')}/>
         <Text style={{color: '#fff'}}>Warren Phen</Text>
       </View>
       )

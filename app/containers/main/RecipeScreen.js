@@ -11,7 +11,7 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
  
 const images = {
-  background: require('../assets/images/homeStats.png'), // Put your own image here
+  background: require('../../assets/images/homeStats.png'), // Put your own image here
 };
 
 export default class RecipeScreen extends React.Component {

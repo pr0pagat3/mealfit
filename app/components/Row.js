@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export function Row({name, iconName, onPress}) {
+export default function Row({name, iconName, onPress}) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.input}>

@@ -12,7 +12,7 @@ const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 export default class BodyStatsView extends React.Component {
   render() {
     return (
-      <ImageBackground source={require('../assets/images/statsbackground.png')} style={styles.backgroundImage}>
+      <ImageBackground source={require('../../assets/images/statsbackground.png')} style={styles.backgroundImage}>
         <ScrollView>
           <View style={styles.navContainer}>
             <View style={styles.statusBar} />

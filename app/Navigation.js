@@ -12,20 +12,21 @@ import ActivityLevelView from './containers/onboarding/ActivityLevelView';
 import MainGoalView from './containers/onboarding/MainGoalView';
 import WeeklyActivityView from './containers/onboarding/WeeklyActivityView';
 import GoalWeightView from './containers/onboarding/GoalWeightView';
+import SuccessView from './containers/onboarding/SuccessView';
 
 //Main App Screens
-import HomeScreen from './screens/HomeScreen';
-import FoodScreen from './screens/FoodScreen';
-import CommunityScreen from './screens/CommunityScreen';
-import StatsScreen from './screens/StatsScreen';
-import RecipeScreen from './screens/RecipeScreen';
-import RecipeFilterModal from './screens/RecipeFilterModal';
-import GroceryListModal from './screens/GroceryListModal';
-import DailyStatsScreen from './screens/DailyStatsScreen';
-import PersonalInfoScreen from './screens/PersonalInfoScreen';
-import BodyStatsView from './screens/BodyStatsView';
-import SettingsView from './screens/SettingsView';
-import FavouritesView from './screens/FavouritesView';
+import HomeScreen from './containers/main/HomeScreen';
+import FoodScreen from './containers/main/FoodScreen';
+import CommunityScreen from './containers/main/CommunityScreen';
+import StatsScreen from './containers/main/StatsScreen';
+import RecipeScreen from './containers/main/RecipeScreen';
+import RecipeFilterModal from './containers/main/RecipeFilterModal';
+import GroceryListModal from './containers/main/GroceryListModal';
+import DailyStatsScreen from './containers/main/DailyStatsScreen';
+import PersonalInfoScreen from './containers/main/PersonalInfoScreen';
+import BodyStatsView from './containers/main/BodyStatsView';
+import SettingsView from './containers/main/SettingsView';
+import FavouritesView from './containers/main/FavouritesView';
 
 const OnboardingNavigator = createStackNavigator(
   {
@@ -35,7 +36,7 @@ const OnboardingNavigator = createStackNavigator(
     MainGoalView: { screen: MainGoalView },
     WeeklyActivityView: { screen: WeeklyActivityView },
     GoalWeightView: { screen: GoalWeightView },
-
+    SuccessView: { screen: SuccessView },
   },
   {  headerMode: 'none' }
 );

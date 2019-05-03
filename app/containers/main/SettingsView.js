@@ -4,8 +4,8 @@ import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { height, width } = Dimensions.get('window');
 import restaurants from '../recipes';
-import Input from '../components/Input';
-import Button from '../components/Button';
+import Input from '../../components/Input'
+import Button from '../../components/Button'
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -13,10 +13,10 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
  
 const images = {
-  background: require('../assets/images/homeStats.png'), // Put your own image here
+  background: require('../../assets/images/homeStats.png'), // Put your own image here
 };
 
-export default class PersonalInfoScreen extends React.Component {
+export default class SettingsView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -30,41 +30,27 @@ export default class PersonalInfoScreen extends React.Component {
               <TouchableOpacity style={styles.iconLeft} onPress={() => this.props.navigation.goBack()}>
                   <Icon name="arrow-left" size={25} color="#000" />
               </TouchableOpacity>
-              <View><Text style={{color: '#000'}}>Personal Info</Text></View>
+              <View><Text style={{color: '#000'}}>Settings</Text></View>
               <TouchableOpacity style={styles.iconRight} onPress={() => {}}>
                   <Icon name="arrow-right" size={25} color="#fff" />
               </TouchableOpacity>
           </View>
         </View>
 
-          <View style={{flex: 1, padding: 20}}>
-            <Input placeholder="Name" />
-            <Input placeholder="Birthday" />
-            <Input placeholder="Region" />
+        <View style={{flex: 1, padding: 20}}>
+          <Input placeholder="Username" />
+          <Input placeholder="Email" />
+          <Input placeholder="Phone Number" />
 
-            <Text>Height</Text>
-            <View style={styles.input}>
-              <Text>145 lbs</Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>LBS</Text>
-                <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>KG</Text>
-              </View>
-            </View>
+          <View style={{borderTopWidth: 1, width: width-40, margin: 40, alignSelf: 'center', borderColor: "#BDBDBD"}} />
+          <Input placeholder="New Password" />
+          <Input placeholder="Confirm New Password" />
+        </View>
 
-            <Text>Height</Text>
-            <View style={styles.input}>
-              <Text>5 ft, 8 in</Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>FT</Text>
-                <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>CM</Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={{padding: 20}}>
-            <Button text="Save"/>
-          </View>
-           
+        <View style={{padding: 20}}>
+          <Button text="Save"/>
+        </View>
+          
       </View>
     );
   }

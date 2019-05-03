@@ -3,7 +3,7 @@ import { View, ScrollView, Platform, Modal, TouchableHighlight, Image, TextInput
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import recipes from '../recipes';
 const { width } = Dimensions.get('window');
-import { Card } from '../components/Card';
+import Card from '../../components/Card';
 
 export default class FoodScreen extends React.Component {
   constructor(props) {

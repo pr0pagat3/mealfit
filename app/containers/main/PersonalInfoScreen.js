@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Platform, SCREEN_HEIGHT, Text, TextInput, TouchableOpacity, Dimensions, FlatList } from 'react-native';
+import { View, StyleSheet, Platform, SCREEN_HEIGHT, Text, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { height, width } = Dimensions.get('window');
-import recipes from '../recipes';
-import { Card } from '../components/Card';
+import restaurants from '../recipes';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -12,41 +13,58 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
  
 const images = {
-  background: require('../assets/images/homeStats.png'), // Put your own image here
+  background: require('../../assets/images/homeStats.png'), // Put your own image here
 };
 
-export default class FavouritesView extends React.Component {
+export default class PersonalInfoScreen extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  renderCard = ({item}) => {
-    return <Card image={item.image} name={item.name}/>
-  }
-
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{ flex: 1 }}>
         <View style={styles.navContainer}>
           <View style={styles.statusBar} />
           <View style={styles.navBar}>
-            <TouchableOpacity style={styles.iconLeft} onPress={() => this.props.navigation.goBack()}>
-                <Icon name="arrow-left" size={25} color="#000" />
-            </TouchableOpacity>
-            <View><Text style={{color: '#000'}}>Favourites</Text></View>
-            <TouchableOpacity style={styles.iconRight} onPress={() => {}}>
-                <Icon name="arrow-right" size={25} color="#fff" />
-            </TouchableOpacity>
+              <TouchableOpacity style={styles.iconLeft} onPress={() => this.props.navigation.goBack()}>
+                  <Icon name="arrow-left" size={25} color="#000" />
+              </TouchableOpacity>
+              <View><Text style={{color: '#000'}}>Personal Info</Text></View>
+              <TouchableOpacity style={styles.iconRight} onPress={() => {}}>
+                  <Icon name="arrow-right" size={25} color="#fff" />
+              </TouchableOpacity>
           </View>
         </View>
 
-        <FlatList
-          data={recipes}
-          renderItem={this.renderCard}
-          horizontal={false}
-          numColumns={2}
-          style={{padding: 10}}
-        />    
+          <View style={{flex: 1, padding: 20}}>
+            <Input placeholder="Name" />
+            <Input placeholder="Birthday" />
+            <Input placeholder="Region" />
+
+            <Text>Height</Text>
+            <View style={styles.input}>
+              <Text>145 lbs</Text>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>LBS</Text>
+                <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>KG</Text>
+              </View>
+            </View>
+
+            <Text>Height</Text>
+            <View style={styles.input}>
+              <Text>5 ft, 8 in</Text>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>FT</Text>
+                <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>CM</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={{padding: 20}}>
+            <Button text="Save"/>
+          </View>
+           
       </View>
     );
   }
@@ -71,7 +89,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   navContainer: {
-    backgroundColor: '#fff',
     height: HEADER_HEIGHT,
     // marginHorizontal: 10,
   },
@@ -136,5 +153,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 10,
     padding: 10
-  },
+  }
 });

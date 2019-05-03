@@ -3,9 +3,8 @@ import { TextInput, View, StyleSheet, Dimensions, Image, Text } from 'react-nati
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from '@shoutem/ui';
 const { height, width } = Dimensions.get('window');
-// import { Card } from '@shoutem/ui'
 
-export function Card({image, name, onPress}) {
+export default function Card({image, name, onPress}) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
@@ -18,7 +17,6 @@ export function Card({image, name, onPress}) {
             <Text style={{fontSize: 10, fontWeight: '100' }}>325 KCAL</Text>
           </View>
           <View style={{flex: 0.15}}><Icon name="heart" color="#FF006F" size={20}/></View>
-          
         </View>
       </View>
     </TouchableOpacity>
