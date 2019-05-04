@@ -17,7 +17,7 @@ import SuccessView from './containers/onboarding/SuccessView';
 //Main App Screens
 import HomeScreen from './containers/main/HomeScreen';
 import FoodScreen from './containers/main/FoodScreen';
-import CommunityScreen from './containers/main/CommunityScreen';
+import CommunityScreen from './containers/main/community';
 import StatsScreen from './containers/main/StatsScreen';
 import RecipeScreen from './containers/main/RecipeScreen';
 import RecipeFilterModal from './containers/main/RecipeFilterModal';
@@ -27,9 +27,11 @@ import PersonalInfoScreen from './containers/main/PersonalInfoScreen';
 import BodyStatsView from './containers/main/BodyStatsView';
 import SettingsView from './containers/main/SettingsView';
 import FavouritesView from './containers/main/FavouritesView';
+import CommunityScreen2 from './containers/main/community';
 
 const OnboardingNavigator = createStackNavigator(
   {
+    CommunityScreen2: { screen: CommunityScreen2 },
     IdentificationView: { screen: IdentificationView },
     MeasurementView: { screen: MeasurementView },
     ActivityLevelView: { screen: ActivityLevelView },
@@ -95,10 +97,10 @@ const TabNavigator = createBottomTabNavigator(
           iconName = `plus`;
         }
         else if (routeName === 'Community') {
-          iconName = `forum`;
+          iconName = `heart-multiple`;
         }
         else if (routeName === 'Stats') {
-          iconName = `account-outline`;
+          iconName = `account`;
         }
 
         if (routeName === 'Action') {
