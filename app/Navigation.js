@@ -31,7 +31,7 @@ import CommunityScreen2 from './containers/main/community';
 
 const OnboardingNavigator = createStackNavigator(
   {
-    CommunityScreen2: { screen: CommunityScreen2 },
+    // CommunityScreen2: { screen: CommunityScreen2 },
     IdentificationView: { screen: IdentificationView },
     MeasurementView: { screen: MeasurementView },
     ActivityLevelView: { screen: ActivityLevelView },
@@ -119,17 +119,9 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 const AppNavigator = createSwitchNavigator({
-  Onboarding: OnboardingNavigator,
+  // Onboarding: OnboardingNavigator,
   Main: TabNavigator,
 });
-
-// const ModalStackNavigator = createStackNavigator({
-//   Main: TabNavigator,
-//   ActionNavigator: { screen: AppNavigator }
-//   }, {
-//     headerMode: 'none',
-//     mode:       'modal'
-// });
 
 const RootStack = createStackNavigator(
   {

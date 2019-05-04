@@ -28,8 +28,8 @@ export default class CommunityScreen extends React.Component {
           tabBarInactiveTextColor="#fff"
           tabBarActiveTextColor="#fff"
           renderTabBar={this.renderTabBar}>
-          <Profile tabLabel={{label: "Profile"}} label="Page #1"/>
           <Community tabLabel={{label: "Community", badge: 3}} label="Page #2 aka Long!"/>
+          <Profile tabLabel={{label: "Profile"}} label="Page #1"/>
         </ScrollableTabView>
       </View>
     );
