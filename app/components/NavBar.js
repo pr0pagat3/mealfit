@@ -22,8 +22,8 @@ export default function NavBar({headerTitle, onPressLeft, onPressRight, iconLeft
         </TouchableOpacity>
       </View>
       <View style={styles.bar}>
-        <View style={{height: 4, backgroundColor: '#00C871', width: (width/2)}}/>
-        <View style={{height: 4, backgroundColor: '#BDBDBD', opacity: 0.2, width: (width/2)}}/>
+        <View style={{height: 4, backgroundColor: '#00C871', width: (progress/100 * width)}}/>
+        <View style={{height: 4, backgroundColor: '#BDBDBD', opacity: 0.2, width: (width - (progress*100/width)) }}/>
       </View>
     </View>
   )

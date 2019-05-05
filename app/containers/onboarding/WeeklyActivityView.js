@@ -15,7 +15,7 @@ class WeeklyActivityView extends React.Component {
   render () {
     return(
       <View style={{flex: 1}}>
-        <NavBar headerTitle="Weekly Activity Goal" />
+        <NavBar headerTitle="Weekly Activity Goal" progress={75} />
         
         <View style={{flex: 1, padding: 20}}>
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>

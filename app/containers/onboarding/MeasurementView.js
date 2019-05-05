@@ -23,7 +23,7 @@ class MeasurementView extends React.Component {
 
     return(
       <View style={{flex: 1}}>
-        <NavBar headerTitle="Measurement" />
+        <NavBar headerTitle="Measurement" progress={30}/>
         <View style={{flex: 1, padding: 20}}>
           <View style={{flex: 1}}>
             <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>

@@ -2,12 +2,13 @@ import React from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function Input({placeholder, iconName}) {
+export default function Input({placeholder, iconName, onChangeText}) {
   return (
     <View style={{flexDirection: 'row'}}>
       <TextInput 
         style={styles.input} 
         placeholder={placeholder}
+        onChangeText={onChangeText}
       />
     </View>
     

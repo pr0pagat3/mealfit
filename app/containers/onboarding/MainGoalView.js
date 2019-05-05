@@ -15,7 +15,7 @@ class MainGoalView extends React.Component {
   render () {
     return(
       <View style={{flex: 1}}>
-        <NavBar headerTitle="Goal" />
+        <NavBar headerTitle="Goal" progress={60} />
         
         <View style={{flex: 1, padding: 20}}>
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>

@@ -15,7 +15,7 @@ class GoalWeightView extends React.Component {
   render () {
     return(
       <View style={{flex: 1}}>
-        <NavBar headerTitle="Goal Weight" />
+        <NavBar headerTitle="Goal Weight" progress={90}/>
         <View style={{flex: 1, padding: 20}}>
           <View style={{flex: 1}}>
             <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
