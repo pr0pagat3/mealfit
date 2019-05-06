@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-date-picker')
     compile project(':@react-native-community_blur')
     compile project(':react-native-svg')
     compile project(':react-native-picker')

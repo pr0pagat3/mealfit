@@ -14,6 +14,9 @@ import WeeklyActivityView from './containers/onboarding/WeeklyActivityView';
 import GoalWeightView from './containers/onboarding/GoalWeightView';
 import SuccessView from './containers/onboarding/SuccessView';
 
+//Modals
+import BirthdayModal from './containers/modals/BirthdayModal';
+
 //Main App Screens
 import HomeScreen from './containers/main/HomeScreen';
 import FoodScreen from './containers/main/FoodScreen';
@@ -129,6 +132,7 @@ const RootStack = createStackNavigator(
     GroceryListModal: { screen: GroceryListModal },
     RecipeFilterModal: { screen: RecipeFilterModal },
     BodyStatsModal: { screen: BodyStatsView },
+    BirthdayModal: { screen: BirthdayModal },
   },
   {
     mode: 'modal',
