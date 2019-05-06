@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import NavBar from '../../components/NavBar';
@@ -7,12 +7,16 @@ import Input from '../../components/Input';
 import axios from 'axios';
 const { height, width } = Dimensions.get('window');
 
-export default function IdentificationView() {
-  const [ value, setValue ] = useState('hello')
+export default class IdentificationView extends React.Component {
+  state = {
+    birthday: '',
+    location: '',
+    gender: ''
+  }
 
-  onChangeBirthday = (text) => setValue('hi');
-  onChangeLocation = (text) => this.setState({location: text})
-  onChangeGender = (gender) => this.setState({gender: gender})
+  onChangeBirthday = (text) => this.setState({birthday: text});
+  onChangeLocation = (text) => this.setState({location: text});
+  onChangeGender = (gender) => this.setState({gender: gender});
 
   onSave = () => {
     // axios.put('http://localhost:3000/users/5ccb5e96a7c8fa829ba6de92', {
@@ -30,14 +34,14 @@ export default function IdentificationView() {
     this.props.navigation.navigate('MeasurementView')
   }
 
-  // render() {
+  render() {
     console.log(this.state)
     return(
       <View style={{flex: 1}}>
         <NavBar headerTitle="Identification" progress={15}/>
         <View style={{flex: 1, padding: 20}}>
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-            <Text>{value}</Text>
+            <Text>I am</Text>
           </View>
 
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -70,7 +74,7 @@ export default function IdentificationView() {
         </View>
       </View>
     )
-  // }
+  }
 }
 
 const styles = StyleSheet.create({
