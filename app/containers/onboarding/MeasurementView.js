@@ -35,15 +35,15 @@ class MeasurementView extends React.Component {
             <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
               <Text>How much do you weigh?</Text>
             </View>
-            <TouchableOpacity onPress={this.expandWeightPicker}>
-              <View style={styles.input}>
-                <Text>145 lbs</Text>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>LBS</Text>
-                  <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>KG</Text>
+              <TouchableOpacity onPress={this.expandWeightPicker}>
+                <View style={styles.input}>
+                  <Text>145 lbs</Text>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>LBS</Text>
+                    <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>KG</Text>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
             </View>
 
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', display: this.state.isWeightPickerCollapsed ? 'none' : 'flex'}}>

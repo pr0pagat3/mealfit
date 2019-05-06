@@ -34,7 +34,9 @@ import CommunityScreen2 from './containers/main/community';
 
 const OnboardingNavigator = createStackNavigator(
   {
-    MeasurementView: { screen: MeasurementView },
+    // MainGoalView: { screen: MainGoalView },
+    // ActivityLevelView: { screen: ActivityLevelView },
+    // MeasurementView: { screen: MeasurementView },
     // CommunityScreen2: { screen: CommunityScreen2 },
     IdentificationView: { screen: IdentificationView },
     MeasurementView: { screen: MeasurementView },

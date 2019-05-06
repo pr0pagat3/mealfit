@@ -1,18 +1,25 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
+import SelectBox from '../../components/SelectBox';
 
 class MainGoalView extends React.Component {
   constructor() {
     super()
 
     this.state = {
-      selectedOption: ''
+      mainGoal: ''
     }
   }
 
+  onSelectLose = () => this.setState({mainGoal: 'lose'})
+  onSelectMaintain = () => this.setState({mainGoal: 'maintain'})
+  onSelectGain = () => this.setState({mainGoal: 'gain'})
+
   render () {
+    const { mainGoal } = this.state;
+
     return(
       <View style={{flex: 1}}>
         <NavBar headerTitle="Goal" progress={60} />
@@ -23,21 +30,9 @@ class MainGoalView extends React.Component {
           </View>
 
           <View style={{flex: 1}}>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose Weight</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Get Healthier</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Build Muscle/Gain Weight</Text>
-              </View>
-            </TouchableOpacity>
+            <SelectBox title="Get Lean or Lose Weight" onPress={this.onSelectLose} isSelected={mainGoal === 'lose'}/>
+            <SelectBox title="Get Healthier/Recomposition" onPress={this.onSelectMaintain} isSelected={mainGoal === 'maintain'}/>
+            <SelectBox title="Build Muscle or Gain Weight" onPress={this.onSelectGain} isSelected={mainGoal === 'gain'}/>
           </View>
 
           <View style={{justifyContent: 'flex-end'}}>
@@ -48,26 +43,5 @@ class MainGoalView extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  selectBox: {
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: "#BDBDBD",
-    borderWidth: 1,
-    borderRadius: 8,
-    marginVertical: 10,
-    padding: 20,
-  },
-  title: {
-    fontSize: 14,
-    // color: "#BDBDBD",
-  },
-  subTitle: {
-    fontSize: 10,
-    // color: "#BDBDBD",
-  },
-});
 
 export default MainGoalView;

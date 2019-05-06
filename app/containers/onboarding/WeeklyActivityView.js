@@ -2,15 +2,21 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
+import SelectBox from '../../components/SelectBox';
 
 class WeeklyActivityView extends React.Component {
   constructor() {
     super()
 
     this.state = {
-      selectedOption: ''
+      weeklyGoal: ''
     }
   }
+
+  // onSelectNotVeryActive = () => this.setState({weeklyGoal: 'not very active'})
+  // onSelectLightlyActive = () => this.setState({weeklyGoal: 'lightly active'})
+  // onSelectActive = () => this.setState({weeklyGoal: 'active'})
+  // onSelectVeryActive = () => this.setState({weeklyGoal: 'very active'})
 
   render () {
     return(
@@ -23,26 +29,10 @@ class WeeklyActivityView extends React.Component {
           </View>
 
           <View style={{flex: 1}}>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 0.5 lbs</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 1 lbs</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 1.5 lbs</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.selectBox}>
-                <Text style={styles.title}>Lose 2 lbs</Text>
-              </View>
-            </TouchableOpacity>
+            <SelectBox title="Lose 0.5 lbs"/>
+            <SelectBox title="Lose 1 lbs"/>
+            <SelectBox title="Lose 1.5 lbs"/>
+            <SelectBox title="Lose 2 lbs"/>
           </View>
 
           <View style={{justifyContent: 'flex-end'}}>
