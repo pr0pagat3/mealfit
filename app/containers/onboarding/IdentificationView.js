@@ -6,10 +6,6 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import axios from 'axios';
 import DatePicker from 'react-native-datepicker';
-import CountryPicker, {
-  getAllCountries
-} from 'react-native-country-picker-modal'
-// import console = require('console');
 const { width } = Dimensions.get('window');
 
 const GenderButton = function({gender, onPress, isSelected}) {
