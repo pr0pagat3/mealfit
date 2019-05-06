@@ -3,7 +3,6 @@ import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-nati
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
-import Input from '../../components/Input';
 import axios from 'axios';
 import DatePicker from 'react-native-datepicker';
 const { width } = Dimensions.get('window');
@@ -29,31 +28,22 @@ export default class IdentificationView extends React.Component {
     gender: '',
   }
 
-  onChangeBirthday = (text) => this.setState({birthday: text})
+  onChangeBirthday = text => this.setState({birthday: text})
   onSelectFemale = () => this.setState({gender: 'female'})
   onSelectMale = () => this.setState({gender: 'male'})
-
-  onChangeDate = (date) => {
-    const { gender, birthday } = this.state
-    this.setState({birthday: date})
-
-    if (gender) {
-      this.props.navigation.navigate('MeasurementView')
-    }
-  }
+  onChangeDate = date => this.setState({birthday: date})
 
   onSave = () => {
-    // axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
-    //   gender: 'female',
-    //   birthday: this.state.birthday,
-    //   location: this.state.location
-    // })
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
+      gender: this.state.gender,
+      birthday: this.state.birthday,
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
     this.props.navigation.navigate('MeasurementView')
   }
@@ -82,7 +72,7 @@ export default class IdentificationView extends React.Component {
               placeholder="Birthday"
               format="YYYY-MM-DD"
               minDate="1900-05-01"
-              maxDate={Date.now}
+              maxDate="2030-12-31"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
               customStyles={{
@@ -98,6 +88,9 @@ export default class IdentificationView extends React.Component {
               onDateChange={this.onChangeDate}
             />
           </View> 
+          <View style={{justifyContent: 'flex-end'}}>
+            <Button onPress={this.onSave} text="Save"/>
+          </View>
         </View>
       </View>
     )

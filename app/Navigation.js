@@ -1,9 +1,7 @@
 import React from 'react';
-import { View, Modal, Platform } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Button, Text, NavigationBar, ListView, ImageBackground, Tile, Title, Subtitle, Divider, Examples, Card, Image, Caption, TouchableOpacity, Row } from '@shoutem/ui';
 import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
-import { Badge } from 'react-native-elements';
 
 //Onboarding Screens
 import IdentificationView from './containers/onboarding/IdentificationView';
@@ -34,7 +32,7 @@ import CommunityScreen2 from './containers/main/community';
 
 const OnboardingNavigator = createStackNavigator(
   {
-    // MainGoalView: { screen: MainGoalView },
+    MainGoalView: { screen: MainGoalView },
     // ActivityLevelView: { screen: ActivityLevelView },
     // MeasurementView: { screen: MeasurementView },
     // CommunityScreen2: { screen: CommunityScreen2 },

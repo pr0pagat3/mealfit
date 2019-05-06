@@ -3,24 +3,36 @@ import { View, Text, StyleSheet } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import SelectBox from '../../components/SelectBox';
+import axios from 'axios';
 
 class MainGoalView extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      mainGoal: ''
-    }
+  state = {
+    mainGoal: ''
   }
+  
 
   onSelectLose = () => this.setState({mainGoal: 'lose'})
   onSelectMaintain = () => this.setState({mainGoal: 'maintain'})
   onSelectGain = () => this.setState({mainGoal: 'gain'})
 
+  onSave = () => {
+    axios.put('http://localhost:3000/users/5ccb5e96a7c8fa829ba6de92', {
+      goal: this.state.mainGoal
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+    // this.props.navigation.navigate('WeeklyActivityView')
+  }
+
   render () {
     const { mainGoal } = this.state;
 
-    return(
+    return (
       <View style={{flex: 1}}>
         <NavBar headerTitle="Goal" progress={60} />
         
@@ -36,7 +48,7 @@ class MainGoalView extends React.Component {
           </View>
 
           <View style={{justifyContent: 'flex-end'}}>
-            <Button onPress={() => this.props.navigation.navigate('WeeklyActivityView')} text="Save"/>
+            <Button onPress={this.onSave} text="Save"/>
           </View>
         </View>
       </View>
