@@ -35,7 +35,6 @@ export default class WeeklyActivityView extends React.Component {
             <SelectBox title="Lose 2 lbs"/>
           </View>
 
-
         </View>
         </ScrollView>
         <View style={{backgroundColor: '#fff', padding: 20}}>

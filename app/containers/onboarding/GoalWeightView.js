@@ -2,15 +2,14 @@ import React from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
+import PickerDropdown from '../../components/PickerDropdown';
 
 class GoalWeightView extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      selectedOption: ''
-    }
+  state = {
+    isPickerCollapsed: true,
   }
+  
+  expandWeightPicker = () => this.setState({isPickerCollapsed: !this.state.isPickerCollapsed})
 
   render () {
     return(
@@ -18,18 +17,13 @@ class GoalWeightView extends React.Component {
         <NavBar headerTitle="Goal Weight" progress={90}/>
         <ScrollView>
         <View style={{flex: 1, padding: 20}}>
-          <View style={{flex: 1}}>
-            <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-              <Text>Set you Goal Weight!</Text>
-            </View>
-            <View style={styles.input}>
-              <Text>0.00 lbs</Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={{marginHorizontal: 10, color: '#00C871', fontWeight: 'bold'}}>LBS</Text>
-                <Text style={{marginHorizontal: 10, color: '#BDBDBD', fontWeight: 'bold'}}>KG</Text>
-              </View>
-            </View>
-          </View>
+          <PickerDropdown
+              title='Your goal weight?'
+              defaultValue={145}
+              valueTypes={['LBS', 'KG']}
+              isPickerCollapsed={this.state.isPickerCollapsed}
+              expandHandle={this.expandWeightPicker}
+            />
         </View>
         </ScrollView>
         <View style={{backgroundColor: '#fff', padding: 20}}>
