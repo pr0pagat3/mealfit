@@ -40,10 +40,10 @@ export default class PickerDrodown extends React.Component {
 
   render() {
     const { valueTypes, value } = this.state;
-    const { title,  isPickerCollapsed } = this.props;
+    const { title, isPickerCollapsed } = this.props;
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{justifyContent: 'flex-start'}}>
         <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
           <Text>{title}</Text>
         </View>
@@ -56,10 +56,10 @@ export default class PickerDrodown extends React.Component {
           </View>
         </TouchableOpacity>
 
-      <View style={{flex: 0.5, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', display: isPickerCollapsed ? 'none' : 'flex'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', display: isPickerCollapsed ? 'none' : 'flex'}}>
         <Picker
           selectedValue={this.state.value}
-          style={{height: 50, width: width/2 - 20}}
+          style={{width: width/2 - 20}}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({value: itemValue})
           }>
@@ -67,7 +67,7 @@ export default class PickerDrodown extends React.Component {
         </Picker>
         <Picker
           selectedValue={this.state.valueTypeSelected}
-          style={{height: 50, width: width/2 - 20}}
+          style={{ width: width/2 - 20}}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({valueTypeSelected: itemValue})
           }>

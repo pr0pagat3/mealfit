@@ -1,7 +1,6 @@
 import React from 'react';
-import { TextInput, View, StyleSheet, Dimensions, Image, Text } from 'react-native';
+import { TextInput, View, StyleSheet, Dimensions, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity } from '@shoutem/ui';
 const { height, width } = Dimensions.get('window');
 
 export default function Card({image, name, onPress}) {

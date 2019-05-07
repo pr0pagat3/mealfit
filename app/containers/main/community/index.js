@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, SectionList, StyleSheet, TextInput, Dimensions } from 'react-native';
-import { Button, ListView, Title, Subtitle, Text, Caption, Divider, Row, Image, TouchableOpacity, Tile } from '@shoutem/ui';
 import restaurants from '../../recipes';
 import { Badge } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

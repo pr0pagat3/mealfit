@@ -28,7 +28,6 @@ import PersonalInfoScreen from './containers/main/PersonalInfoScreen';
 import BodyStatsView from './containers/main/BodyStatsView';
 import SettingsView from './containers/main/SettingsView';
 import FavouritesView from './containers/main/FavouritesView';
-import CommunityScreen2 from './containers/main/community';
 
 const OnboardingNavigator = createStackNavigator(
   {

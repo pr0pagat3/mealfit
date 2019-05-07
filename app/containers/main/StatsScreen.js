@@ -1,6 +1,5 @@
 import React from 'react';
-import { ListView, View, Icon, Text, Divider, TouchableOpacity } from '@shoutem/ui';
-import { Dimensions, SCREEN_HEIGHT, Platform, StyleSheet, Image } from 'react-native'
+import { Dimensions, SCREEN_HEIGHT, Platform, StyleSheet, Image, TouchableOpacity, Text, View } from 'react-native'
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 const { width } = Dimensions.get('window');
 import Row from '../../components/Row';

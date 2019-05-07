@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Platform, SCREEN_HEIGHT, Text, Animated, Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ListView, ImageBackground, Tile, Title, Divider, Caption } from '@shoutem/ui';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 const { width } = Dimensions.get('window');
