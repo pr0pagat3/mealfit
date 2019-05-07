@@ -16,17 +16,17 @@ class MainGoalView extends React.Component {
   onSelectGain = () => this.setState({mainGoal: 'gain'})
 
   onSave = () => {
-    axios.put('http://localhost:3000/users/5ccb5e96a7c8fa829ba6de92', {
-      goal: this.state.mainGoal
-    })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    // axios.put('http://localhost:3000/users/5ccb5e96a7c8fa829ba6de92', {
+    //   goal: this.state.mainGoal
+    // })
+    // .then(response => {
+    //   console.log(response);
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
 
-    // this.props.navigation.navigate('WeeklyActivityView')
+    this.props.navigation.navigate('WeeklyActivityView')
   }
 
   render () {
