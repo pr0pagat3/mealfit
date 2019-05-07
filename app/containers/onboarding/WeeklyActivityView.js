@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import SelectBox from '../../components/SelectBox';
@@ -22,7 +22,7 @@ export default class WeeklyActivityView extends React.Component {
     return(
       <View style={{flex: 1}}>
         <NavBar headerTitle="Weekly Activity Goal" progress={75} />
-        
+        <ScrollView>
         <View style={{flex: 1, padding: 20}}>
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
             <Text>Set your weekly goal!</Text>
@@ -35,9 +35,11 @@ export default class WeeklyActivityView extends React.Component {
             <SelectBox title="Lose 2 lbs"/>
           </View>
 
-          <View style={{justifyContent: 'flex-end'}}>
-            <Button onPress={() => this.props.navigation.navigate('GoalWeightView')} text="Save"/>
-          </View>
+
+        </View>
+        </ScrollView>
+        <View style={{backgroundColor: '#fff', padding: 20}}>
+          <Button onPress={() => this.props.navigation.navigate('GoalWeightView')} text="Save"/>
         </View>
       </View>
     )

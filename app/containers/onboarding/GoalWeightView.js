@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 
@@ -16,6 +16,7 @@ class GoalWeightView extends React.Component {
     return(
       <View style={{flex: 1}}>
         <NavBar headerTitle="Goal Weight" progress={90}/>
+        <ScrollView>
         <View style={{flex: 1, padding: 20}}>
           <View style={{flex: 1}}>
             <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
@@ -29,12 +30,11 @@ class GoalWeightView extends React.Component {
               </View>
             </View>
           </View>
-
-          <View style={{justifyContent: 'flex-end'}}>
-            <Button onPress={() => this.props.navigation.navigate('SuccessView')} text="Save"/>
-          </View>
         </View>
-          
+        </ScrollView>
+        <View style={{backgroundColor: '#fff', padding: 20}}>
+          <Button onPress={() => this.props.navigation.navigate('SuccessView')} text="Save"/>
+        </View>
       </View>
     )
   }

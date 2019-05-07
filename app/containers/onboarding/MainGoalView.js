@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import SelectBox from '../../components/SelectBox';
@@ -35,7 +35,7 @@ class MainGoalView extends React.Component {
     return (
       <View style={{flex: 1}}>
         <NavBar headerTitle="Goal" progress={60} />
-        
+        <ScrollView>
         <View style={{flex: 1, padding: 20}}>
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
             <Text>What is your main goal?</Text>
@@ -47,9 +47,10 @@ class MainGoalView extends React.Component {
             <SelectBox title="Build Muscle or Gain Weight" onPress={this.onSelectGain} isSelected={mainGoal === 'gain'}/>
           </View>
 
-          <View style={{justifyContent: 'flex-end'}}>
-            <Button onPress={this.onSave} text="Save"/>
-          </View>
+        </View>
+        </ScrollView>
+        <View style={{backgroundColor: '#fff', padding: 20}}>
+          <Button onPress={this.onSave} text="Save"/>
         </View>
       </View>
     )

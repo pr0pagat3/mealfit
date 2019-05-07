@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
@@ -34,16 +34,16 @@ export default class IdentificationView extends React.Component {
   onChangeDate = date => this.setState({birthday: date})
 
   onSave = () => {
-    axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
-      gender: this.state.gender,
-      birthday: this.state.birthday,
-    })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    // axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
+    //   gender: this.state.gender,
+    //   birthday: this.state.birthday,
+    // })
+    // .then(response => {
+    //   console.log(response);
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
 
     this.props.navigation.navigate('MeasurementView')
   }
@@ -54,6 +54,7 @@ export default class IdentificationView extends React.Component {
     return (
       <View style={{flex: 1}}>
         <NavBar headerTitle="Identification" progress={15}/>
+        <ScrollView>
         <View style={{flex: 1, padding: 20}}>
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
             <Text>I am</Text>
@@ -88,9 +89,10 @@ export default class IdentificationView extends React.Component {
               onDateChange={this.onChangeDate}
             />
           </View> 
-          <View style={{justifyContent: 'flex-end'}}>
-            <Button onPress={this.onSave} text="Save"/>
-          </View>
+        </View>
+        </ScrollView>
+        <View style={{backgroundColor: '#fff', padding: 20}}>
+          <Button onPress={this.onSave} text="Save"/>
         </View>
       </View>
     )

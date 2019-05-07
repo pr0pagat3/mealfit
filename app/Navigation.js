@@ -31,7 +31,7 @@ import FavouritesView from './containers/main/FavouritesView';
 
 const OnboardingNavigator = createStackNavigator(
   {
-    // IdentificationView: { screen: IdentificationView },
+    IdentificationView: { screen: IdentificationView },
     MeasurementView: { screen: MeasurementView },
     ActivityLevelView: { screen: ActivityLevelView },
     MainGoalView: { screen: MainGoalView },
