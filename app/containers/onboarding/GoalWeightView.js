@@ -19,7 +19,7 @@ class GoalWeightView extends React.Component {
         <View style={{flex: 1, padding: 20}}>
           <PickerDropdown
               title='Your goal weight?'
-              defaultValue={145}
+              value={145}
               valueTypes={['LBS', 'KG']}
               isPickerCollapsed={this.state.isPickerCollapsed}
               expandHandle={this.expandWeightPicker}

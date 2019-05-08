@@ -1,11 +1,12 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { colors } from '../constants';
 
-export default function Button({text, onPress, backgroundColor, borderColor}) {
+export default function Button({text, onPress, backgroundColor, borderColor, isLoading = false}) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
-        <Text style={{color: "#00C871"}}>{text}</Text>
+        {isLoading ? <ActivityIndicator size="small" color={colors.primary} /> : <Text style={{color: "#00C871"}}>{text}</Text>}
       </View>
     </TouchableOpacity>
   )

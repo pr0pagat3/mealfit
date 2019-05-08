@@ -5,10 +5,11 @@ import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import axios from 'axios';
 import DatePicker from 'react-native-datepicker';
+import { colors } from '../../constants';
 const { width } = Dimensions.get('window');
 
 const GenderButton = function({gender, onPress, isSelected}) {
-  const color = isSelected ? '#00C871' : '#BDBDBD';
+  const color = isSelected ? colors.primary : colors.lightgrey;
 
   return (
     <TouchableOpacity onPress={onPress}>
@@ -26,6 +27,7 @@ export default class IdentificationView extends React.Component {
   state = {
     birthday: '',
     gender: '',
+    isLoading: false,
   }
 
   onChangeBirthday = text => this.setState({birthday: text})
@@ -33,23 +35,27 @@ export default class IdentificationView extends React.Component {
   onSelectMale = () => this.setState({gender: 'male'})
   onChangeDate = date => this.setState({birthday: date})
 
-  onSave = () => {
-    // axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
-    //   gender: this.state.gender,
-    //   birthday: this.state.birthday,
-    // })
-    // .then(response => {
-    //   console.log(response);
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    // });
+  onSave = async () => {
+    this.setState({isLoading: true});
+    
+    await axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
+      gender: this.state.gender,
+      birthday: this.state.birthday,
+    })
+    .then(response => {
+      console.log(response);
+      this.setState({isLoading: false});
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({isLoading: false});
+    });
 
     this.props.navigation.navigate('MeasurementView')
   }
 
   render() {
-    const { gender, birthday } = this.state;
+    const { gender, birthday, isLoading } = this.state;
 
     return (
       <View style={{flex: 1}}>
@@ -91,8 +97,8 @@ export default class IdentificationView extends React.Component {
           </View> 
         </View>
         </ScrollView>
-        <View style={{backgroundColor: '#fff', padding: 20}}>
-          <Button onPress={this.onSave} text="Save"/>
+        <View style={{backgroundColor: colors.white, padding: 20}}>
+          <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>
     )
@@ -100,22 +106,12 @@ export default class IdentificationView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: "#00C871",
-    borderWidth: 1,
-    borderRadius: 8,
-    marginVertical: 10,
-    padding: 10
-  },
   selectBox: {
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 150,
     width: (width/2 - 30),
-    borderColor: '#BDBDBD',
+    borderColor: colors.lightgrey,
     borderWidth: 1,
     borderRadius: 8,
     marginVertical: 10,
@@ -125,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     alignItems: 'flex-start',
-    borderColor: '#BDBDBD',
+    borderColor: colors.lightgrey,
     borderWidth: 1,
     borderRadius: 8,
     marginVertical: 10,

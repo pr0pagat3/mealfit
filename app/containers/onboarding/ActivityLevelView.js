@@ -24,7 +24,8 @@ class ActivityLevelView extends React.Component {
     super()
 
     this.state = {
-      activityLevel: ''
+      activityLevel: '',
+      isLoading: false
     }
   }
 
@@ -34,22 +35,26 @@ class ActivityLevelView extends React.Component {
   onSelectVeryActive = () => this.setState({activityLevel: 'very active'})
   onSelectExtremelyActive = () => this.setState({activityLevel: 'extremely active'})
 
-  onSave = () => {
-    // axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
-    //   activityLevel: this.state.activityLevel,
-    // })
-    // .then(response => {
-    //   console.log(response);
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    // });
+  onSave = async() => {
+    this.setState({isLoading: true})
+    
+    await axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
+      activityLevel: this.state.activityLevel,
+    })
+    .then(response => {
+      console.log(response);
+      this.setState({isLoading: false})
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({isLoading: false})
+    });
 
     this.props.navigation.navigate('MainGoalView')
   }
 
   render () {
-    const { activityLevel } = this.state;
+    const { activityLevel, isLoading } = this.state;
 
     return(
       <View style={{flex: 1}}>
@@ -67,7 +72,7 @@ class ActivityLevelView extends React.Component {
           </View>
         </ScrollView>
         <View style={{backgroundColor: '#fff', padding: 20}}>
-          <Button onPress={this.onSave} text="Save"/>
+          <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>
     )

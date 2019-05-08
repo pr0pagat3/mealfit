@@ -1,26 +1,26 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, Picker, Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
+import { colors } from '../constants';
+
 
 export default class PickerDrodown extends React.Component {
-  state = {
-    valueTypes: this.props.valueTypes ? this.props.valueTypes : null,
-    valueTypeSelected: this.props.valueTypes ? this.props.valueTypes[0]: null,
-    value: this.props.defaultValue.toString()
-  }
-
-  // onChangeValueType = () => this.setState({valueTypeSelected: })
+  // state = {
+  //   valueTypes: this.props.valueTypes ? this.props.valueTypes : null,
+  //   valueTypeSelected: this.props.valueTypes ? this.props.valueTypes[0]: null,
+  //   value: this.props.value.toString()
+  // }
 
   renderTypes() {
     return this.props.valueTypes.map((type, index) => {
-      const { valueTypeSelected } = this.state;
+      const { typeValue } = this.props;
       const valueTypeStyle = {
         marginHorizontal: 10,
-        color: valueTypeSelected === type ? '#00C871' : '#BDBDBD',
+        color: typeValue === type ? '#00C871' : '#BDBDBD',
         fontWeight: 'bold',
       }
 
-      return <Text key={index} style={valueTypeStyle}>{type}</Text>
+      return <Text key={index} style={valueTypeStyle}>{type.toUpperCase()}</Text>
       }
     )
   }
@@ -39,8 +39,8 @@ export default class PickerDrodown extends React.Component {
   }
 
   render() {
-    const { valueTypes, value } = this.state;
-    const { title, isPickerCollapsed } = this.props;
+    // const { valueTypes, valueTypeSelected } = this.state;
+    const { title, isPickerCollapsed, onChange, onChangeType, value, valueTypes, typeValue } = this.props;
 
     return (
       <View style={{justifyContent: 'flex-start'}}>
@@ -58,19 +58,17 @@ export default class PickerDrodown extends React.Component {
 
       <View style={{ flexDirection: 'row', justifyContent: 'center', display: isPickerCollapsed ? 'none' : 'flex'}}>
         <Picker
-          selectedValue={this.state.value}
+          selectedValue={value}
           style={{width: width/2 - 20}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({value: itemValue})
-          }>
+          onValueChange={onChange}
+        >
           {this.renderPickerItems()}
         </Picker>
         <Picker
-          selectedValue={this.state.valueTypeSelected}
+          selectedValue={typeValue}
           style={{ width: width/2 - 20}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({valueTypeSelected: itemValue})
-          }>
+          onValueChange={onChangeType}
+        >
           {this.renderPickerItemTypes()}
         </Picker>
         </View>
