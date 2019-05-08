@@ -17,6 +17,7 @@ class MainGoalView extends React.Component {
 
   onSave = async () => {
     const { mainGoal } = this.state
+    if (!mainGoal) return;
 
     this.setState({isLoading: true});
 

@@ -15,7 +15,7 @@ export default class WeeklyActivityView extends React.Component {
       mainGoal: 'Gain',
       weightType: '',
       weeklyGoal: '',
-      loading: true,
+      isLoading: false,
     }
   }
 
@@ -36,23 +36,42 @@ export default class WeeklyActivityView extends React.Component {
   }
 
   renderWeeklyGoalSelectBox() {
-    const { mainGoal, weeklyGoal } = this.state;
+    const { mainGoal, weeklyGoal, weightType } = this.state;
 
     const lbsArray = [0.5, 1, 1.5, 2];
     const kgArray = [0.3, 0.5, 0.7, 0.9];
+    const mapArray = weightType === 'lbs' ? lbsArray : kgArray;
     
-    return lbsArray.map((goal, index) =>
+    return mapArray.map((goal, index) =>
       <SelectBox 
         key={index}
-        title={`${mainGoal} ${goal} lbs`}
+        title={`${mainGoal} ${goal} ${weightType}`}
         onPress={() => this.setState({weeklyGoal: goal})}
         isSelected={weeklyGoal === goal} 
       />
     )
   }
 
+  onSave = async () => {
+    this.setState({isLoading: true})
+
+    await axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
+      weeklyRate: this.state.weeklyGoal
+    })
+    .then(response => {
+      console.log(response);
+      this.setState({isLoading: false})
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({isLoading: false})
+    });
+
+    return this.props.navigation.navigate('GoalWeightView')
+  }
+
   render () {
-    const { loading } = this.state;
+    const { isLoading } = this.state;
 
     return (
       <View style={{flex: 1}}>
@@ -64,13 +83,13 @@ export default class WeeklyActivityView extends React.Component {
           </View>
 
           <View style={{flex: 1}}>
-            {loading ? <ActivityIndicator size="large" color={colors.primary} /> : this.renderWeeklyGoalSelectBox() }
+            {this.renderWeeklyGoalSelectBox()}
           </View>
 
         </View>
         </ScrollView>
         <View style={{backgroundColor: '#fff', padding: 20}}>
-          <Button onPress={() => this.props.navigation.navigate('GoalWeightView')} text="Save"/>
+          <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>
     )

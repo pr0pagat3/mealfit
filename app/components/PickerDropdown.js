@@ -3,20 +3,13 @@ import { TouchableOpacity, View, Text, StyleSheet, Picker, Dimensions } from 're
 const { width } = Dimensions.get('window');
 import { colors } from '../constants';
 
-
 export default class PickerDrodown extends React.Component {
-  // state = {
-  //   valueTypes: this.props.valueTypes ? this.props.valueTypes : null,
-  //   valueTypeSelected: this.props.valueTypes ? this.props.valueTypes[0]: null,
-  //   value: this.props.value.toString()
-  // }
-
   renderTypes() {
     return this.props.valueTypes.map((type, index) => {
       const { typeValue } = this.props;
       const valueTypeStyle = {
         marginHorizontal: 10,
-        color: typeValue === type ? '#00C871' : '#BDBDBD',
+        color: typeValue === type ? colors.primary : colors.lightgrey,
         fontWeight: 'bold',
       }
 
@@ -83,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 50,
-    borderColor: '#BDBDBD',
+    borderColor: colors.lightgrey,
     borderWidth: 1,
     borderRadius: 8,
     marginVertical: 10,

@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import Button from '../../components/Button';
 import NavBar from '../../components/NavBar';
-const { width } = Dimensions.get('window');
 import PickerDropdown from '../../components/PickerDropdown';
 import axios from 'axios';
 // import console = require('console');

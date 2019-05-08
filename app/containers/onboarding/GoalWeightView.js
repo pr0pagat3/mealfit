@@ -1,69 +1,72 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import PickerDropdown from '../../components/PickerDropdown';
+import axios from 'axios';
 
-class GoalWeightView extends React.Component {
+export default class GoalWeightView extends React.Component {
   state = {
     isPickerCollapsed: true,
+    goalWeight: '145',
+    weightType: '',
+    isLoading: false
+  }
+
+  componentDidMount() {
+    axios.get('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
+      .then(response => {
+        this.setState({
+          weightType: response.data.weightType,
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   
-  expandWeightPicker = () => this.setState({isPickerCollapsed: !this.state.isPickerCollapsed})
+  expandGoalWeightPicker = () => this.setState({isPickerCollapsed: !this.state.isPickerCollapsed})
+  onChangeGoalWeight = (itemValue, itemIndex) => this.setState({goalWeight: itemValue})
+
+  onSave = async () => {
+    await axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
+      goalWeight: this.state.goalWeight
+    })
+    .then(response => {
+      console.log(response);
+      this.setState({isLoading: false});
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({isLoading: false});
+    });
+
+    return this.props.navigation.navigate('SuccessView')
+  }
 
   render () {
+    const { weightType, goalWeight, isPickerCollapsed } = this.state;
+    console.log(this.state.goalWeight)
     return(
       <View style={{flex: 1}}>
         <NavBar headerTitle="Goal Weight" progress={90}/>
         <ScrollView>
         <View style={{flex: 1, padding: 20}}>
           <PickerDropdown
-              title='Your goal weight?'
-              value={145}
-              valueTypes={['LBS', 'KG']}
-              isPickerCollapsed={this.state.isPickerCollapsed}
-              expandHandle={this.expandWeightPicker}
+            title='Your goal weight?'
+            onChange={this.onChangeGoalWeight}
+            value={goalWeight}
+            typeValue={weightType}
+            valueTypes={[weightType]}
+            isPickerCollapsed={isPickerCollapsed}
+            expandHandle={this.expandGoalWeightPicker}
             />
         </View>
         </ScrollView>
         <View style={{backgroundColor: '#fff', padding: 20}}>
-          <Button onPress={() => this.props.navigation.navigate('SuccessView')} text="Save"/>
+          <Button onPress={this.onSave} text="Save"/>
         </View>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  selectBox: {
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: "#BDBDBD",
-    borderWidth: 1,
-    borderRadius: 8,
-    marginVertical: 10,
-    padding: 20,
-  },
-  title: {
-    fontSize: 14,
-    // color: "#BDBDBD",
-  },
-  subTitle: {
-    fontSize: 10,
-    // color: "#BDBDBD",
-  },
-  input: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: 50,
-    borderColor: '#BDBDBD',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginVertical: 10,
-    padding: 10
-  }
-});
-
-export default GoalWeightView;

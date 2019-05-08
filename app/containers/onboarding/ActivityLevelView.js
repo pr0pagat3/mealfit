@@ -36,6 +36,7 @@ class ActivityLevelView extends React.Component {
   onSelectExtremelyActive = () => this.setState({activityLevel: 'extremely active'})
 
   onSave = async() => {
+    if (!this.state.activityLevel) return
     this.setState({isLoading: true})
     
     await axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
