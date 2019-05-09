@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { colors } from '../../constants';
+import { colors } from '../constants';
 
 export default function SelectBox({title, subTitle, onPress, isSelected}) {
   const color = isSelected ? colors.primary : null;
