@@ -45,8 +45,8 @@ export default class GoalWeightView extends React.Component {
   }
 
   render () {
-    const { weightType, goalWeight, isPickerCollapsed } = this.state;
-    console.log(this.state.goalWeight)
+    const { weightType, goalWeight, isPickerCollapsed, isLoading } = this.state;
+
     return(
       <View style={{flex: 1}}>
         <NavBar headerTitle="Goal Weight" progress={90}/>
@@ -64,7 +64,7 @@ export default class GoalWeightView extends React.Component {
         </View>
         </ScrollView>
         <View style={{backgroundColor: '#fff', padding: 20}}>
-          <Button onPress={this.onSave} text="Save"/>
+          <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>
     )
