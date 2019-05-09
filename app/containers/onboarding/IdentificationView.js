@@ -14,7 +14,7 @@ const GenderButton = function({gender, onPress, isSelected}) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.selectBox, { borderColor: color }]}>
-        <Icon name={`gender-${gender}`} size={40} color={color}/>
+        <Icon name={`gender-${gender.toLowerCase()}`} size={50} color={color}/>
         <View style={{flexDirection: 'row'}}>
           <Text style={{marginHorizontal: 10, color: color, fontWeight: 'bold'}}>{gender}</Text>
         </View>
@@ -67,8 +67,8 @@ export default class IdentificationView extends React.Component {
           </View>
 
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <GenderButton gender="female" isSelected={gender === 'female'} onPress={this.onSelectFemale}/>
-            <GenderButton gender="male" isSelected={gender === 'male'} onPress={this.onSelectMale} />
+            <GenderButton gender="Female" isSelected={gender === 'female'} onPress={this.onSelectFemale}/>
+            <GenderButton gender="Male" isSelected={gender === 'male'} onPress={this.onSelectMale} />
           </View>
          
           <View style={{flex: 1, marginVertical: 40}}>

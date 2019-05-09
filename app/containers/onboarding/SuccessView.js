@@ -5,16 +5,8 @@ import Button from '../../components/Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class SuccessView extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      selectedOption: ''
-    }
-  }
-
   render () {
-    return(
+    return (
       <View style={{flex: 1}}>
         <NavBar headerTitle="Success"/>
         <View style={{flex: 1, padding: 20}}>
