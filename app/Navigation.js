@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { colors } from './constants'
 
 //Onboarding Screens
 import IdentificationView from './containers/onboarding/IdentificationView';
@@ -103,7 +104,7 @@ const TabNavigator = createBottomTabNavigator(
         }
 
         if (routeName === 'Action') {
-          return (<TouchableOpacity onPress={() => navigation.navigate('RecipeFilterModal')}><View style={{width: 40, height: 40, backgroundColor: '#01c870', borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}><Icon name={iconName} size={25} color='white' /></View></TouchableOpacity>);
+          return (<TouchableOpacity onPress={() => navigation.navigate('RecipeFilterModal')}><View style={{width: 40, height: 40, backgroundColor: colors.primary, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}><Icon name={iconName} size={25} color={colors.white} /></View></TouchableOpacity>);
         } else {
           return <Icon name={iconName} size={25} color={tintColor} />;
         }
@@ -111,7 +112,7 @@ const TabNavigator = createBottomTabNavigator(
     }),
     tabBarOptions: {
       activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
+      inactiveTintColor: '#92A49B',
       showLabel: false,
     },
   },

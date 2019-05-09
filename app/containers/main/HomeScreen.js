@@ -7,6 +7,8 @@ const { width } = Dimensions.get('window');
 import PlannerCard from '../../components/PlannerCard';
 import axios from 'axios';
 import moment from 'moment';
+import { colors } from '../../constants';
+var Spinner = require('react-native-spinkit');
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -19,20 +21,24 @@ const images = {
  
 export default class HomeScreen extends React.Component {
   state = {
-    dailyCalorieTarget: ''
+    dailyCalorieTarget: '',
+    isLoading: false,
   }
 
   componentDidMount() {
+    this.setState({isLoading: true});
+
     axios.get('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
     .then(response => {
       console.log(response.data.goal);
       this.setState({
-        dailyCalorieTarget: response.data.dailyCalorieTarget
+        dailyCalorieTarget: response.data.dailyCalorieTarget,
+        isLoading: false
       })
     })
     .catch(error => {
       console.log(error);
-      this.setState({loading: false})
+      this.setState({isLoading: false})
     });
   }
 
@@ -43,7 +49,7 @@ export default class HomeScreen extends React.Component {
         <TouchableOpacity style={styles.iconLeft} onPress={() => {}}>
           <Icon name="arrow-left" size={25} color="#fff" />
         </TouchableOpacity>
-        <View><Text style={{color: '#fff'}}>Monday April 19</Text></View>
+        <View><Text style={{color: '#fff'}}>{moment().format("dddd MMMM Do")}</Text></View>
         <TouchableOpacity style={styles.iconRight} onPress={() => {}}>
           <Icon name="arrow-right" size={25} color="#fff" />
         </TouchableOpacity>
@@ -64,6 +70,8 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
+    const { isLoading } = this.state;
+
     const calories = (
       <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('BodyStatsModal')}>
@@ -78,12 +86,13 @@ export default class HomeScreen extends React.Component {
                 (fill) => (
                   <View style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
-                        { Math.round(this.state.dailyCalorieTarget) }
+                        {isLoading ? <Spinner style={{opacity: 0.5}} type='ChasingDots' isVisible={true} color={colors.white}/> : Math.round(this.state.dailyCalorieTarget) }
+                        
                       </Text>
                       <Text style={{color: 'white'}}>
                         cals remaining
                     </Text>
-                  </View> 
+                  </View>
                 )
               }
           </AnimatedCircularProgress>
