@@ -1,24 +1,19 @@
 import React from 'react';
-import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import SelectBox from '../../components/SelectBox';
 import axios from 'axios';
 import { colors } from '../../constants';
-// import console = require('console');
 
 export default class WeeklyActivityView extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      mainGoal: 'Gain',
-      weightType: '',
-      weeklyGoal: '',
-      isLoading: false,
-    }
+  state = {
+    mainGoal: 'gain',
+    weightType: '',
+    weeklyGoal: '',
+    isLoading: false,
   }
-
+  
   componentDidMount() {
     axios.get('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
     .then(response => {
@@ -88,7 +83,7 @@ export default class WeeklyActivityView extends React.Component {
 
         </View>
         </ScrollView>
-        <View style={{backgroundColor: '#fff', padding: 20}}>
+        <View style={{backgroundColor: colors.white, padding: 20}}>
           <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>

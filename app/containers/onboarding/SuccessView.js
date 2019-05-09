@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 import moment from 'moment';
+import { colors } from '../../constants';
 
 class SuccessView extends React.Component {
   state = {
@@ -41,7 +42,7 @@ class SuccessView extends React.Component {
         <View style={{flex: 1, padding: 20}}>
 
           <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-            <Icon name="checkbox-marked" color="#00C871" size={100}/>
+            <Icon name="checkbox-marked" color={colors.primary} size={100}/>
             <Text style={styles.title}>Congrats!</Text>
             <Text style={styles.subTitle}>You've successfully created your account</Text>
           </View>
@@ -53,8 +54,8 @@ class SuccessView extends React.Component {
 
           <View style={{justifyContent: 'flex-end'}}>
             <Text style={{alignSelf: 'center', fontSize: 12}}>Your target weight of 
-              <Text style={{color: "#00C871"}}> {`${goalWeight} ${weightType}`} </Text> will be reached 
-              <Text style={{color: "#00C871"}}> {moment(dateGoalReached).format('MMM DD')}</Text>
+              <Text style={{color: colors.primary}}> {`${goalWeight} ${weightType}`} </Text> will be reached 
+              <Text style={{color: colors.primary}}> {moment(dateGoalReached).format('MMM DD')}</Text>
             </Text>
             <Button onPress={() => this.props.navigation.navigate('Home')} text="Start Your Journey!"/>
           </View>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: "#BDBDBD",
+    borderColor: colors.lightgrey,
     borderWidth: 1,
     borderRadius: 8,
     marginVertical: 10,
@@ -83,13 +84,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: "#00C871",
+    color: colors.primary,
     marginVertical: 10,
   },
   subTitle: {
     fontSize: 14,
     marginVertical: 10,
-    // color: "#BDBDBD",
   },
 });
 

@@ -4,6 +4,7 @@ import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import PickerDropdown from '../../components/PickerDropdown';
 import axios from 'axios';
+import { colors } from '../../constants';
 
 export default class GoalWeightView extends React.Component {
   state = {
@@ -63,7 +64,7 @@ export default class GoalWeightView extends React.Component {
             />
         </View>
         </ScrollView>
-        <View style={{backgroundColor: '#fff', padding: 20}}>
+        <View style={{backgroundColor: colors.white, padding: 20}}>
           <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>

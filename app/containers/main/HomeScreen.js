@@ -5,6 +5,8 @@ import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 const { width } = Dimensions.get('window');
 import PlannerCard from '../../components/PlannerCard';
+import axios from 'axios';
+import moment from 'moment';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -16,8 +18,22 @@ const images = {
 };
  
 export default class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    dailyCalorieTarget: ''
+  }
+
+  componentDidMount() {
+    axios.get('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
+    .then(response => {
+      console.log(response.data.goal);
+      this.setState({
+        dailyCalorieTarget: response.data.dailyCalorieTarget
+      })
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({loading: false})
+    });
   }
 
   renderNavBar = () => (
@@ -35,7 +51,7 @@ export default class HomeScreen extends React.Component {
     </View>
   )
 
-  renderDailyPlanner = () => {
+  renderDailyPlanner() {
     return (
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginVertical: 10}}>
@@ -62,10 +78,10 @@ export default class HomeScreen extends React.Component {
                 (fill) => (
                   <View style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
-                        { 1601 }
+                        { Math.round(this.state.dailyCalorieTarget) }
                       </Text>
                       <Text style={{color: 'white'}}>
-                        cals left
+                        cals remaining
                     </Text>
                   </View> 
                 )

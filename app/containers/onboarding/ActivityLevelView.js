@@ -4,16 +4,17 @@ import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
+import { colors } from '../../constants';
 
 const ActivityLevelSelect = function({title, subTitle, onPress, isSelected}) {
-  const color = isSelected ? '#00C871' : null;
+  const color = isSelected ? colors.primary : null;
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={[styles.selectBox, { borderColor: isSelected ? '#00C871' : '#BDBDBD' }]}>
+      <View style={[styles.selectBox, { borderColor: isSelected ? colors.primary : colors.lightgrey }]}>
         <Text style={[styles.title, { color: color }]}>{title}</Text>
         <Text style={[styles.subTitle, { color: color }]}>{subTitle}</Text>
-        {isSelected ? <Icon name='check-outline' color='#00C871' style={{position: 'absolute', right: 5, top: 5}}/> : null}
+        {isSelected ? <Icon name='check-outline' color={colors.primary} style={{position: 'absolute', right: 5, top: 5}}/> : null}
       </View>
     </TouchableOpacity>
   )
@@ -72,7 +73,7 @@ class ActivityLevelView extends React.Component {
             <ActivityLevelSelect title="Extremely Active" subTitle="very hard exercise/sports and physical job" onPress={this.onSelectExtremelyActive} isSelected={activityLevel === "extremely active"}/>
           </View>
         </ScrollView>
-        <View style={{backgroundColor: '#fff', padding: 20}}>
+        <View style={{backgroundColor: colors.white, padding: 20}}>
           <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>
@@ -84,8 +85,7 @@ const styles = StyleSheet.create({
   selectBox: {
     height: 80,
     justifyContent: 'center',
-    // alignItems: 'center',
-    borderColor: "#BDBDBD",
+    borderColor: colors.lightgrey,
     borderWidth: 1,
     borderRadius: 8,
     marginVertical: 10,
@@ -93,11 +93,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 14,
-    // color: "#BDBDBD",
   },
   subTitle: {
     fontSize: 10,
-    // color: "#BDBDBD",
   },
 });
 

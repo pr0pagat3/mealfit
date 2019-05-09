@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import NavBar from '../../components/NavBar';
 import PickerDropdown from '../../components/PickerDropdown';
 import axios from 'axios';
-// import console = require('console');
+import { colors } from '../../constants';
 
 export default class MeasurementView extends React.Component {
   state = {
@@ -76,7 +76,7 @@ export default class MeasurementView extends React.Component {
           />
         </View>
         </ScrollView>
-        <View style={{backgroundColor: '#fff', padding: 20}}>
+        <View style={{backgroundColor: colors.white, padding: 20}}>
           <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
         </View>
       </View>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 50,
-    borderColor: '#BDBDBD',
+    borderColor: colors.lightgrey,
     borderWidth: 1,
     borderRadius: 8,
     marginVertical: 10,
