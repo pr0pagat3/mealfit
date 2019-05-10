@@ -4,6 +4,8 @@ const { height, width } = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LineChart } from 'react-native-chart-kit';
 import axios from 'axios';
+import { colors } from '../../constants';
+import moment from 'moment';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -16,6 +18,8 @@ export default class BodyStatsView extends React.Component {
     totalDailyEnergyExpenditure: '',
     goalWeight: '',
     activityLevel: '',
+    dateGoalReached: '',
+    weightType: ''
   }
 
   componentDidMount() {
@@ -27,6 +31,10 @@ export default class BodyStatsView extends React.Component {
       this.setState({
         basalMetaboliceRate: response.data.bmr,
         totalDailyEnergyExpenditure: response.data.maintainenceCalories,
+        goalWeight: response.data.goalWeight,
+        activityLevel: response.data.activityLevel,
+        dateGoalReached: response.data.dateGoalReached,
+        weightType: response.data.weightType,
         isLoading: false
       })
     })
@@ -37,22 +45,23 @@ export default class BodyStatsView extends React.Component {
   }
 
   render() {
+    const { basalMetaboliceRate, totalDailyEnergyExpenditure, goalWeight, activityLevel, dateGoalReached, weightType } = this.state
+
     return (
       <ImageBackground source={require('../../assets/images/statsbackground.png')} style={styles.backgroundImage}>
-        <ScrollView>
+        
           <View style={styles.navContainer}>
             <View style={styles.statusBar} />
             <View style={styles.navBar}>
               <TouchableOpacity style={styles.iconLeft} onPress={() => this.props.navigation.goBack()}>
                   <Icon name="close" size={25} color="#fff" />
               </TouchableOpacity>
-              <View><Text style={{color: '#fff'}}>Body Stats</Text></View>
               <TouchableOpacity style={styles.iconRight} onPress={() => {}}>
                   <Icon name="arrow-right" size={25} color="transparent" />
               </TouchableOpacity>
             </View>
           </View>
-          
+          <ScrollView>
           <View>
             <View style={styles.opaque}/>
             <View style={styles.box1}>
@@ -96,18 +105,29 @@ export default class BodyStatsView extends React.Component {
               }}
             />
           </View>
+
+          <View>
+            <Text style={{alignSelf: 'center', color: colors.white, fontSize: 12}}>
+              {`Your target weight of ${goalWeight} ${weightType} will be reached ${moment(dateGoalReached).format('MMM DD')}`}
+            </Text>
+          </View>
           <View style={{borderTopWidth: 1, width: width-40, marginVertical: 10, marginHorizontal: 40, borderColor: "#fff", alignSelf: 'center'}} />
           
           <View style={{margin: 20}}>
             <Text style={{fontSize: 18, marginBottom: 8, color: "#fff"}}>Your Body Information</Text>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Text style={{color: "#fff"}}>Activity Level</Text>
+              <Text style={{color: "#fff"}}>{activityLevel}</Text>  
+            </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text style={{color: "#fff"}}>Basal Metabolic Rate</Text>
-              <Text style={{color: "#fff"}}>{Math.round(this.state.basalMetaboliceRate)}</Text>
+              <Text style={{color: "#fff"}}>{Math.round(basalMetaboliceRate)}</Text>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text style={{color: "#fff"}}>Total Daily Energy Expenditure</Text>
-              <Text style={{color: "#fff"}}>{Math.round(this.state.totalDailyEnergyExpenditure)}</Text>  
+              <Text style={{color: "#fff"}}>{Math.round(totalDailyEnergyExpenditure)}</Text>  
             </View>
+
           </View>
         </ScrollView>
       </ImageBackground>
@@ -134,8 +154,6 @@ const styles = StyleSheet.create({
   box1: {
     marginTop: 40,
     paddingVertical: 40,
-    // backgroundColor: 'red',
-    // borderWidth: 1,
     width: width-40,
     marginHorizontal: 20,
     justifyContent: 'space-between',
