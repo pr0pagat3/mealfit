@@ -66,7 +66,9 @@ export default class BodyStatsView extends React.Component {
             <View style={styles.opaque}/>
             <View style={styles.box1}>
               <Text style={{color: "#fff", fontSize: 36, fontWeight: 'bold'}}>1795</Text>
-              <Text style={{color: "#fff" }}>Average Gained Calorie Per Day</Text>
+              <Text style={{alignSelf: 'center', color: colors.white, fontSize: 12}}>
+              {`Your target weight of ${goalWeight} ${weightType} will be reached ${moment(dateGoalReached).format('MMM DD')}`}
+              </Text>
             </View>
           </View>
 
@@ -106,11 +108,6 @@ export default class BodyStatsView extends React.Component {
             />
           </View>
 
-          <View>
-            <Text style={{alignSelf: 'center', color: colors.white, fontSize: 12}}>
-              {`Your target weight of ${goalWeight} ${weightType} will be reached ${moment(dateGoalReached).format('MMM DD')}`}
-            </Text>
-          </View>
           <View style={{borderTopWidth: 1, width: width-40, marginVertical: 10, marginHorizontal: 40, borderColor: "#fff", alignSelf: 'center'}} />
           
           <View style={{margin: 20}}>
