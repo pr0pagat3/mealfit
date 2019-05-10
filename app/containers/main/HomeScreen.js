@@ -23,6 +23,16 @@ export default class HomeScreen extends React.Component {
   state = {
     dailyCalorieTarget: '',
     isLoading: false,
+    dailyMacros: {
+      protein: '',
+      fat: '',
+      carbs: ''
+    },
+    consumedMacros: {
+      protein: 0,
+      fat: 0,
+      carbs: 0
+    }
   }
 
   componentDidMount() {
@@ -33,6 +43,7 @@ export default class HomeScreen extends React.Component {
       console.log(response.data.goal);
       this.setState({
         dailyCalorieTarget: response.data.dailyCalorieTarget,
+        dailyMacros: response.data.dailyMacros,
         isLoading: false
       })
     })
@@ -70,7 +81,8 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, dailyMacros, dailyCalorieTarget, consumedMacros } = this.state;
+    const { protein, fat, carbs } = dailyMacros;
 
     const calories = (
       <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
@@ -86,7 +98,7 @@ export default class HomeScreen extends React.Component {
                 (fill) => (
                   <View style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
-                        {isLoading ? <Spinner style={{opacity: 0.5}} type='ChasingDots' isVisible={true} color={colors.white}/> : Math.round(this.state.dailyCalorieTarget) }
+                        {isLoading ? <Spinner style={{opacity: 0.5}} type='ChasingDots' isVisible={true} color={colors.white}/> : Math.round(dailyCalorieTarget) }
                         
                       </Text>
                       <Text style={{color: 'white'}}>
@@ -100,7 +112,7 @@ export default class HomeScreen extends React.Component {
         <View style={{ marginTop: 30, justifyContent: 'space-between', alignItems: 'flex-end', flexDirection: 'row', width: width-40  }}>
           <View>
             <Text style={styles.macrosText}>Protein</Text>
-            <Text style={{color: 'white'}}>127/250g</Text>
+            <Text style={{color: 'white'}}>{`${consumedMacros.protein} / ${Math.round(protein)}g`}</Text>
             <View style={styles.bar}>
               <View style={{height: 4, backgroundColor: '#fff', width: 30}}/>
               <View style={{height: 4, backgroundColor: '#fff', opacity: 0.2, width: 50}}/>
@@ -109,7 +121,7 @@ export default class HomeScreen extends React.Component {
           
           <View>
             <Text style={styles.macrosText}>Fat</Text>
-            <Text style={{color: 'white'}}>127/250g</Text>
+            <Text style={{color: 'white'}}>{`${consumedMacros.fat} / ${Math.round(fat)}g`}</Text>
             <View style={styles.bar}>
               <View style={{height: 4, backgroundColor: '#fff', width: 20}}/>
               <View style={{height: 4, backgroundColor: '#fff', opacity: 0.2, width: 70}}/>
@@ -118,7 +130,7 @@ export default class HomeScreen extends React.Component {
 
           <View>
             <Text style={styles.macrosText}>Carbs</Text>
-            <Text style={{color: 'white'}}>127/250g</Text>
+            <Text style={{color: 'white'}}>{`${consumedMacros.carbs} / ${Math.round(carbs)}g`}</Text>
             <View style={styles.bar}>
               <View style={{height: 4, backgroundColor: '#fff', width: 40}}/>
               <View style={{height: 4, backgroundColor: '#fff', opacity: 0.2, width: 50}}/>
