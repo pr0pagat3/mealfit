@@ -2,7 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Platform, SCREEN_HEIGHT, Text, Image, TouchableOpacity, Dimensions, ImageBackground, ScrollView } from 'react-native';
 const { height, width } = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { LineChart } from 'react-native-chart-kit'
+import { LineChart } from 'react-native-chart-kit';
+import axios from 'axios';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -10,6 +11,31 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
 export default class BodyStatsView extends React.Component {
+  state = {
+    basalMetaboliceRate: '',
+    totalDailyEnergyExpenditure: '',
+    goalWeight: '',
+    activityLevel: '',
+  }
+
+  componentDidMount() {
+    this.setState({isLoading: true});
+
+    axios.get('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
+    .then(response => {
+      console.log(response.data.goal);
+      this.setState({
+        basalMetaboliceRate: response.data.bmr,
+        totalDailyEnergyExpenditure: response.data.maintainenceCalories,
+        isLoading: false
+      })
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({isLoading: false})
+    });
+  }
+
   render() {
     return (
       <ImageBackground source={require('../../assets/images/statsbackground.png')} style={styles.backgroundImage}>
@@ -73,22 +99,14 @@ export default class BodyStatsView extends React.Component {
           <View style={{borderTopWidth: 1, width: width-40, marginVertical: 10, marginHorizontal: 40, borderColor: "#fff", alignSelf: 'center'}} />
           
           <View style={{margin: 20}}>
-            <Text style={{fontSize: 18, marginBottom: 8, color: "#fff"}}>Average Eaten Nutrients</Text>
+            <Text style={{fontSize: 18, marginBottom: 8, color: "#fff"}}>Your Body Information</Text>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={{color: "#fff"}}>Calories (kcal)</Text>
-              <Text style={{color: "#fff"}}>1795</Text>
+              <Text style={{color: "#fff"}}>Basal Metabolic Rate</Text>
+              <Text style={{color: "#fff"}}>{Math.round(this.state.basalMetaboliceRate)}</Text>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={{color: "#fff"}}>Protein (g)</Text>
-              <Text style={{color: "#fff"}}>300</Text>  
-            </View>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={{color: "#fff"}}>Fat (g)</Text>
-              <Text style={{color: "#fff"}}>150</Text>
-            </View>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={{color: "#fff"}}>Carbohydrates (g)</Text>
-              <Text style={{color: "#fff"}}>110</Text>
+              <Text style={{color: "#fff"}}>Total Daily Energy Expenditure</Text>
+              <Text style={{color: "#fff"}}>{Math.round(this.state.totalDailyEnergyExpenditure)}</Text>  
             </View>
           </View>
         </ScrollView>

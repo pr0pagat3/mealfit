@@ -150,7 +150,7 @@ export default class HomeScreen extends React.Component {
           headerMinHeight={HEADER_HEIGHT}
           headerMaxHeight={350}
           extraScrollHeight={20}
-          navbarColor="#fa600d"
+          navbarColor={colors.secondary}
           title={calories}
           titleStyle={styles.titleStyle}
           backgroundImage={images.background}
