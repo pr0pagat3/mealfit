@@ -3,7 +3,9 @@ import { View, StyleSheet, Platform, SCREEN_HEIGHT, Text, TouchableOpacity, Dime
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const { height, width } = Dimensions.get('window');
-import restaurants from '../recipes';
+import axios from 'axios';
+import { colors } from '../../constants';
+import ScrollableTabView, { ScrollableTabBar, DefaultTabBar } from 'react-native-scrollable-tab-view';
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -11,12 +13,36 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
  
 const images = {
-  background: require('../../assets/images/homeStats.png'), // Put your own image here
+  background: require('../../assets/images/homeStats.png'),
 };
 
 export default class RecipeScreen extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    isLoading: false,
+    servingSize: '',
+    info: '',
+    image: '',
+    ingredients: [],
+  }
+
+  componentDidMount() {
+    this.setState({isLoading: true});
+
+    axios.get('http://localhost:3000/recipes/1')
+    .then(response => {
+      console.log(response.data);
+      this.setState({
+        info: response.data.info,
+        servingSize: response.data.servingSize,
+        image: response.data.image,
+        ingredients: response.data.ingredients,
+        isLoading: false,
+      })
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({isLoading: false})
+    });
   }
   
   renderNavBar = () => (
@@ -30,35 +56,48 @@ export default class RecipeScreen extends React.Component {
     </View>
   )
 
-  renderContent = () => (
-    <View>
-      <View style={{flex: 1, backgroundColor: "#fff"}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 15}}>
-        <Text>Number Of Servings</Text>
-        <Text>4</Text>
-      </View>
-      
-      <View style={{marginHorizontal: 20, marginVertical: 5}}>
-        <Text style={{color: "#707070"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos</Text>
-      </View>
-
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={{flexDirection: 'row', borderBottomWidth: 5, borderColor: "#00C871", flex: 0.5, justifyContent: 'center', paddingVertical: 15}}>
-          <Icon color="#00C871" name="cart-outline" size={20}/>
-          <Text style={{fontSize: 16, color: "#00C871"}}>Ingredients</Text>
-        </View>
-        <View style={{flexDirection: 'row', flex: 0.5, justifyContent: 'center', paddingVertical: 15}}>
-          <Icon color="#707070" name="clipboard-text-outline" size={20}/>
-          <Text style={{fontSize: 16, color: "#707070"}}>Instructions</Text>
-        </View>
-      </View>
+  renderContent = () => {
+    const { info, servingSize } = this.state;
+    
+    return (
+      <View>
+        <View style={{flex: 1, backgroundColor: "#fff"}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 15}}>
+            <Text>Number Of Servings</Text>
+            <Text>{servingSize}</Text>
+          </View>
         
+          <View style={{marginHorizontal: 20, marginVertical: 5}}>
+            <Text style={{color: "#707070"}}>{info}</Text>
+          </View>
+
+          <ScrollableTabView
+            style={{marginTop: 20 }}
+            tabBarBackgroundColor={colors.white}
+            tabBarUnderlineStyle={{backgroundColor: colors.primary}}
+            tabBarActiveTextColor={colors.primary}
+            tabBarInActiveTextColor="#707070"
+            initialPage={1}
+            renderTabBar={() => <DefaultTabBar />}
+          >
+            <View tabLabel="Ingredients" style={styles.box}>
+              {this.renderIngredients()}
+            </View>
+            <Text tabLabel='Instructions'>favorite</Text>
+          </ScrollableTabView>     
+              
+        </View>
       </View>
-      
-    </View>
-  );
+    );
+  }
+
+  renderIngredients = () => {
+    return this.state.ingredients.map((ingredient, index) => <Text style={{color: '#707070', marginVertical: 5}}><Icon size={5} name="checkbox-blank-circle"/> {ingredient}</Text>)
+  }
 
   render() {
+    const { image } = this.state;
+
     const calories = (
       <View style={{ height: 180, justifyContent: 'space-between', alignItems: 'flex-end', flexDirection: 'row', width: width-40  }}>
       <View>
@@ -69,7 +108,6 @@ export default class RecipeScreen extends React.Component {
         <Text style={{color: '#fff', marginLeft: 10}}>15 minutes</Text>
       </View>         
     </View>
-      
     );
 
     return (
@@ -104,7 +142,7 @@ export default class RecipeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: colors.background,
   },
   contentContainer: {
     flexGrow: 1,
@@ -143,12 +181,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
+  macrosText: {
+    color: 'white',
+    fontWeight: 'bold'
+  },
   box: {
+    marginTop: 20,
     marginHorizontal: 15,
     backgroundColor: '#fff',
     padding: 10,
     borderRadius: 8,
-    marginBottom: 10,
+    marginBottom: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -158,8 +201,4 @@ const styles = StyleSheet.create({
     shadowRadius: 15.00,
     elevation: 24,
   },
-  macrosText: {
-    color: 'white',
-    fontWeight: 'bold'
-  }
 });
