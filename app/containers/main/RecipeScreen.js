@@ -72,11 +72,11 @@ export default class RecipeScreen extends React.Component {
           </View>
 
           <ScrollableTabView
-            style={{marginTop: 20 }}
+            style={{marginTop: 20, backgroundColor: colors.background }}
             tabBarBackgroundColor={colors.white}
             tabBarUnderlineStyle={{backgroundColor: colors.primary}}
             tabBarActiveTextColor={colors.primary}
-            tabBarInActiveTextColor="#707070"
+            tabBarInactiveTextColor="#707070"
             initialPage={1}
             renderTabBar={() => <DefaultTabBar />}
           >
@@ -85,7 +85,7 @@ export default class RecipeScreen extends React.Component {
             </View>
             <Text tabLabel='Instructions'>favorite</Text>
           </ScrollableTabView>     
-              
+
         </View>
       </View>
     );
