@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import NavBar from '../../components/NavBar';
@@ -23,86 +23,79 @@ const GenderButton = function({gender, onPress, isSelected}) {
   )
 }
 
-export default class IdentificationView extends React.Component {
-  state = {
-    birthday: '',
-    gender: '',
-    isLoading: false,
-  }
+export default function IdentificationView({navigation}) {
+  const [ birthday, setBirthday ] = useState('');
+  const [ gender, setGender ] = useState('');
+  const [ loading, setLoading ] = useState(false);
 
-  onChangeBirthday = text => this.setState({birthday: text})
-  onSelectFemale = () => this.setState({gender: 'female'})
-  onSelectMale = () => this.setState({gender: 'male'})
-  onChangeDate = date => this.setState({birthday: date})
+  onChangeDate = date => setBirthday(date);
+  onSelectFemale = () => setGender('female')
+  onSelectMale = () => setGender('male')
 
   onSave = async () => {
-    this.setState({isLoading: true});
+    setLoading(true)
     
     await axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
-      gender: this.state.gender,
-      birthday: this.state.birthday,
+      gender: gender,
+      birthday: birthday,
     })
     .then(response => {
       console.log(response);
-      this.setState({isLoading: false});
+      setLoading(false)
     })
     .catch(error => {
       console.log(error);
-      this.setState({isLoading: false});
+      setLoading(false)
     });
 
-    this.props.navigation.navigate('MeasurementView')
+    navigation.navigate('MeasurementView')
   }
 
-  render() {
-    const { gender, birthday, isLoading } = this.state;
-
-    return (
-      <View style={{flex: 1}}>
-        <NavBar headerTitle="Identification" progress={15}/>
-        <ScrollView>
-        <View style={{flex: 1, padding: 20}}>
-          <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-            <Text>I am</Text>
-          </View>
-
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <GenderButton gender="Female" isSelected={gender === 'female'} onPress={this.onSelectFemale}/>
-            <GenderButton gender="Male" isSelected={gender === 'male'} onPress={this.onSelectMale} />
-          </View>
-         
-          <View style={{flex: 1, marginVertical: 40}}>
-            <DatePicker
-              style={{width: width - 40}}
-              date={birthday}
-              mode="date"
-              placeholder="Birthday"
-              format="YYYY-MM-DD"
-              minDate="1900-05-01"
-              maxDate="2030-12-31"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  right: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: styles.input
-                // ... You can check the source to find the other keys.
-              }}
-              onDateChange={this.onChangeDate}
-            />
-          </View> 
+  return (
+    <View style={{flex: 1}}>
+      <NavBar headerTitle="Identification" progress={15}/>
+      <ScrollView>
+      <View style={{flex: 1, padding: 20}}>
+        <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
+          <Text>I am</Text>
         </View>
-        </ScrollView>
-        <View style={{backgroundColor: colors.white, padding: 20}}>
-          <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <GenderButton gender="Female" isSelected={gender === 'female'} onPress={this.onSelectFemale}/>
+          <GenderButton gender="Male" isSelected={gender === 'male'} onPress={this.onSelectMale} />
         </View>
+        
+        <View style={{flex: 1, marginVertical: 40}}>
+          <DatePicker
+            style={{width: width - 40}}
+            date={birthday}
+            mode="date"
+            placeholder="Birthday"
+            format="YYYY-MM-DD"
+            minDate="1900-05-01"
+            maxDate="2030-12-31"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                right: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: styles.input
+              // ... You can check the source to find the other keys.
+            }}
+            onDateChange={this.onChangeDate}
+          />
+        </View> 
       </View>
-    )
-  }
+      </ScrollView>
+      <View style={{backgroundColor: colors.white, padding: 20}}>
+        <Button onPress={this.onSave} isLoading={loading} text="Save"/>
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

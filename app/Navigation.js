@@ -119,7 +119,7 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 const AppNavigator = createSwitchNavigator({
-  // Onboarding: OnboardingNavigator,
+  Onboarding: OnboardingNavigator,
   Main: TabNavigator,
 });
 
