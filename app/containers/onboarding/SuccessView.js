@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
@@ -7,63 +7,65 @@ import axios from 'axios';
 import moment from 'moment';
 import { colors } from '../../constants';
 
-class SuccessView extends React.Component {
-  state = {
+export default function SuccessView({navigation}) {
+  const [ data, setData ] = useState({
     dailyCalorieTarget: 0,
     goalWeight: 0,
     dateGoalReached: moment().format('MMM DD'),
     weightType: ''
-  }
+  })
 
-  componentDidMount() {
-    axios.get('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
-    .then(response => {
-      console.log(response.data.goal);
-      this.setState({
-        dailyCalorieTarget: response.data.dailyCalorieTarget,
-        goalWeight: response.data.goalWeight,
-        dateGoalReached: response.data.dateGoalReached,
-        weightType: response.data.weightType,
-      })
-    })
-    .catch(error => {
-      console.log(error);
-      this.setState({loading: false})
-    });
-  }
+  const [ isContentLoading, setIsContentLoading ] = useState(false)
+  const [ isSaveLoading, setIsSaveLoading ] = useState(false)
+  const [ url, setUrl ] = useState('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
+  const [isError, setIsError] = useState(false)
 
-  render () {
-    const { goalWeight, weightType, dateGoalReached } = this.state;
-    console.log(moment(dateGoalReached).format('MMM DD'))
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsContentLoading(true);
 
-    return (
-      <View style={{flex: 1}}>
-        <NavBar headerTitle="Success"/>
-        <View style={{flex: 1, padding: 20}}>
+      try {
+        const result = await axios(url);
 
-          <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-            <Icon name="checkbox-marked" color={colors.primary} size={100}/>
-            <Text style={styles.title}>Congrats!</Text>
-            <Text style={styles.subTitle}>You've successfully created your account</Text>
-          </View>
+        setData(result.data);
+      } catch (error) {
+        setIsError(true);
+      }
 
-          <View style={{flex: 1, alignItems: 'center', marginVertical: 40 }}>
-            <Text style={styles.calorieText}>{Math.round(this.state.dailyCalorieTarget)}</Text>
-            <Text>Your Daily Calorie Goal</Text>
-          </View>
+      setIsContentLoading(false);
+    };
 
-          <View style={{justifyContent: 'flex-end'}}>
-            <Text style={{alignSelf: 'center', fontSize: 12}}>Your target weight of 
-              <Text style={{color: colors.primary}}> {`${goalWeight} ${weightType}`} </Text> will be reached 
-              <Text style={{color: colors.primary}}> {moment(dateGoalReached).format('MMM DD')}</Text>
-            </Text>
-            <Button onPress={() => this.props.navigation.navigate('Home')} text="Start Your Journey!"/>
-          </View>
+    fetchData();
+  }, [url]);
 
+  return (
+    <View style={{flex: 1}}>
+      <NavBar headerTitle="Success" progress={100}/>
+      <View style={{flex: 1, padding: 20}}>
+
+        <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
+          <Icon name="checkbox-marked" color={colors.primary} size={100}/>
+          <Text style={styles.title}>Congrats!</Text>
+          <Text style={styles.subTitle}>You've successfully created your account</Text>
         </View>
+
+        <View style={{flex: 1, alignItems: 'center', marginVertical: 40 }}>
+          <Text style={styles.calorieText}>{Math.round(data.dailyCalorieTarget)}</Text>
+          <Text>Your Daily Calorie Goal</Text>
+        </View>
+
+        <View style={{justifyContent: 'flex-end'}}>
+          <Text style={{alignSelf: 'center', fontSize: 12}}>Your target weight of 
+            <Text style={{color: colors.primary}}> {`${data.goalWeight} ${data.weightType}`} </Text> will be reached 
+            <Text style={{color: colors.primary}}> {moment(data.dateGoalReached).format('MMM DD')}</Text>
+          </Text>
+          <Button onPress={() => navigation.navigate('Home')} text="Start Your Journey!"/>
+        </View>
+
       </View>
-    )
-  }
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -92,5 +94,3 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
-
-export default SuccessView;

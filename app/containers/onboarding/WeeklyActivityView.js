@@ -1,92 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/Button';
 import SelectBox from '../../components/SelectBox';
 import axios from 'axios';
 import { colors } from '../../constants';
+import Placeholder, { Line, Media } from 'rn-placeholder';
 
-export default class WeeklyActivityView extends React.Component {
-  state = {
-    mainGoal: 'gain',
-    weightType: '',
-    weeklyGoal: '',
-    isLoading: false,
-  }
-  
-  componentDidMount() {
-    axios.get('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
-    .then(response => {
-      console.log(response.data.goal);
-      this.setState({
-        mainGoal: response.data.goal,
-        weightType: response.data.weightType,
-        loading: false
-      })
-    })
-    .catch(error => {
-      console.log(error);
-      this.setState({loading: false})
-    });
-  }
+export default function WeeklyActivityView({navigation}) {
+  const [ data, setData ] = useState({goal: 'gain', weightType: '', weeklyRate: ''})
+  const [ isContentLoading, setIsContentLoading ] = useState(false)
+  const [ isSaveLoading, setIsSaveLoading ] = useState(false)
+  const [ url, setUrl ] = useState('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92')
+  const [isError, setIsError] = useState(false);
 
-  renderWeeklyGoalSelectBox() {
-    const { mainGoal, weeklyGoal, weightType } = this.state;
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsContentLoading(true);
 
+      try {
+        const result = await axios(url);
+
+        setData(result.data);
+      } catch (error) {
+        setIsError(true);
+      }
+
+      setIsContentLoading(false);
+    };
+
+    fetchData();
+  }, [url]);
+
+  function renderWeeklyGoalSelectBox() {
     const lbsArray = [0.5, 1, 1.5, 2];
     const kgArray = [0.3, 0.5, 0.7, 0.9];
-    const mapArray = weightType === 'lbs' ? lbsArray : kgArray;
-    
+    const mapArray = data.weightType === 'lbs' ? lbsArray : kgArray;
+    console.log(data)
     return mapArray.map((goal, index) =>
-      <SelectBox 
+      <SelectBox
         key={index}
-        title={`${mainGoal} ${goal} ${weightType}`}
-        onPress={() => this.setState({weeklyGoal: goal})}
-        isSelected={weeklyGoal === goal} 
+        title={`${data.goal} ${goal} ${data.weightType}`}
+        onPress={() => setData({...data, weeklyRate: goal})}
+        isSelected={data.weeklyRate === goal}
       />
     )
   }
 
   onSave = async () => {
-    this.setState({isLoading: true})
-
+    setIsSaveLoading(true)
     await axios.put('https://mfserver.herokuapp.com/users/5ccb5e96a7c8fa829ba6de92', {
-      weeklyRate: this.state.weeklyGoal
+      weeklyRate: data.weeklyRate
     })
     .then(response => {
       console.log(response);
-      this.setState({isLoading: false})
+      setIsSaveLoading(false)
     })
     .catch(error => {
       console.log(error);
-      this.setState({isLoading: false})
+      setIsSaveLoading(false)
     });
 
-    return this.props.navigation.navigate('GoalWeightView')
+    return navigation.navigate('GoalWeightView')
   }
 
-  render () {
-    const { isLoading } = this.state;
-
-    return (
-      <View style={{flex: 1}}>
-        <NavBar headerTitle="Weekly Activity Goal" progress={75} />
-        <ScrollView>
-        <View style={{flex: 1, padding: 20}}>
-          <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
-            <Text>Set your weekly goal!</Text>
-          </View>
-
-          <View style={{flex: 1}}>
-            {this.renderWeeklyGoalSelectBox()}
-          </View>
-
+  return (
+    <View style={{flex: 1}}>
+      <NavBar headerTitle="Weekly Activity Goal" progress={75} />
+      <ScrollView>
+      <View style={{flex: 1, padding: 20}}>
+        <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
+          <Text>Set your weekly goal!</Text>
         </View>
-        </ScrollView>
-        <View style={{backgroundColor: colors.white, padding: 20}}>
-          <Button onPress={this.onSave} isLoading={isLoading} text="Save"/>
-        </View>
+
+        {/* <View style={{flex: 1}}>
+          {renderWeeklyGoalSelectBox()}
+        </View> */}
+        <Placeholder
+          isReady={!isContentLoading}
+          animation="fade"
+          whenReadyRender={() => renderWeeklyGoalSelectBox()}
+          renderLeft={() => <Media hasRadius />}
+          renderRight={() => <Media />}
+        >
+          <Line width="70%" />
+          <Line />
+          <Line />
+          <Line width="30%" />
+        </Placeholder>
+
       </View>
-    )
-  }
+      </ScrollView>
+      <View style={{backgroundColor: colors.white, padding: 20}}>
+        <Button onPress={this.onSave} isLoading={isSaveLoading} text="Save"/>
+      </View>
+    </View>
+  )
 }
