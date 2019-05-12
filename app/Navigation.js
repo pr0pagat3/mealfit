@@ -44,7 +44,7 @@ const OnboardingNavigator = createStackNavigator(
 );
 
 const HomeStack = createStackNavigator({
-  // Home: { screen: HomeScreen },
+  Home: { screen: HomeScreen },
   Recipe: { screen: RecipeScreen },
   },
   {  headerMode: 'none' }

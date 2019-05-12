@@ -4,15 +4,11 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.react.rnspinkit.RNSpinkitPackage;
-import com.henninghall.date_picker.DatePickerPackage;
-import com.cmcewen.blurview.BlurViewPackage;
 import com.horcrux.svg.SvgPackage;
-import com.beefe.picker.PickerViewPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
-import com.reactnative.photoview.PhotoViewPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.cmcewen.blurview.BlurViewPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -34,15 +30,11 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNSpinkitPackage(),
-            new DatePickerPackage(),
-            new BlurViewPackage(),
             new SvgPackage(),
-            new PickerViewPackage(),
             new RNGestureHandlerPackage(),
-            new FBSDKPackage(),
-            new PhotoViewPackage(),
             new LinearGradientPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new BlurViewPackage()
       );
     }
 
